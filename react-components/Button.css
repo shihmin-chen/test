@@ -111,22 +111,26 @@
   filter: brightness(0.8);
 }
 
+/* Tertiary - grey outline (not solid) */
 .x-btn--tertiary {
   --x-btn-main-color: var(--muted-foreground);
-  --x-btn-color: var(--foreground);
+  --x-btn-color: var(--muted-foreground);
+  --x-btn-bg: transparent;
+  --x-btn-bd-color: var(--muted-foreground);
 }
 
-.x-btn--tertiary:not(.x-btn--outline):hover:not(.x-btn--disabled) {
+.x-btn--tertiary:hover:not(.x-btn--disabled) {
+  background-color: var(--muted);
+}
+
+.x-btn--tertiary:active:not(.x-btn--disabled),
+.x-btn--tertiary.x-btn--loading:not(.x-btn--disabled) {
+  background-color: var(--muted);
   filter: brightness(0.9);
 }
 
-.x-btn--tertiary:not(.x-btn--outline):active:not(.x-btn--disabled),
-.x-btn--tertiary.x-btn--loading:not(.x-btn--disabled) {
-  filter: brightness(0.8);
-}
-
 /* Disabled state */
-.x-btn:not(.x-btn--outline):not(.x-btn--text).x-btn--disabled {
+.x-btn:not(.x-btn--outline):not(.x-btn--text):not(.x-btn--tertiary).x-btn--disabled {
   --x-btn-color: var(--muted-foreground);
   --x-btn-bg: var(--muted);
   pointer-events: none;
@@ -155,8 +159,10 @@
 }
 
 .x-btn--outline.x-btn--disabled,
-.x-btn--text.x-btn--disabled {
+.x-btn--text.x-btn--disabled,
+.x-btn--tertiary.x-btn--disabled {
   --x-btn-main-color: var(--muted-foreground);
+  --x-btn-color: var(--muted-foreground);
   pointer-events: none;
   cursor: not-allowed;
 }

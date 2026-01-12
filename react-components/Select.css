@@ -60,8 +60,10 @@
   filter: brightness(0.95);
 }
 
+/* White theme (same as default) */
 .x-select--white {
   background-color: var(--card);
+  border: 1px solid var(--border);
 }
 
 .x-select--white:hover:not([aria-disabled='true']):not([aria-readonly='true']) {
@@ -77,6 +79,28 @@
 }
 
 .x-select--white.x-select--open:hover {
+  filter: brightness(0.95);
+}
+
+/* Fill mode - darker background, no border */
+.x-select--fill {
+  background-color: var(--input-background);
+  border: none;
+}
+
+.x-select--fill:hover:not([aria-disabled='true']):not([aria-readonly='true']) {
+  background-color: var(--muted);
+}
+
+.x-select--fill:active:not([aria-disabled='true']):not([aria-readonly='true']) {
+  filter: brightness(0.95);
+}
+
+.x-select--fill.x-select--open {
+  background-color: var(--muted);
+}
+
+.x-select--fill.x-select--open:hover {
   filter: brightness(0.95);
 }
 
@@ -99,6 +123,7 @@
   height: var(--x-select-arrow-size);
   color: var(--x-select-color);
   transition: transform 0.2s;
+  flex-shrink: 0;
 }
 
 .x-select-arrow--open {

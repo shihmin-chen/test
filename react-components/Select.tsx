@@ -13,6 +13,7 @@ export interface SelectProps {
   placeholder?: string;
   size?: 'sm' | 'md';
   theme?: 'white' | 'grey';
+  fill?: boolean;
   error?: boolean;
   disabled?: boolean;
   readOnly?: boolean;
@@ -31,6 +32,7 @@ const Select = forwardRef<HTMLDivElement, SelectProps>(
       placeholder = '--',
       size = 'md',
       theme = 'grey',
+      fill = false,
       error = false,
       disabled = false,
       readOnly = false,
@@ -157,6 +159,7 @@ const Select = forwardRef<HTMLDivElement, SelectProps>(
             'x-select',
             isOpen && 'x-select--open',
             theme === 'white' && 'x-select--white',
+            fill && 'x-select--fill',
             `x-select--${size}`,
             error && 'x-select--error',
             className,
@@ -198,15 +201,15 @@ const Select = forwardRef<HTMLDivElement, SelectProps>(
             ]
               .filter(Boolean)
               .join(' ')}
-            width="20"
-            height="20"
+            width={size === 'sm' ? '16' : '20'}
+            height={size === 'sm' ? '16' : '20'}
             viewBox="0 0 20 20"
             fill="none"
           >
             <path
               d="M5 7.5L10 12.5L15 7.5"
               stroke="currentColor"
-              strokeWidth="2"
+              strokeWidth="1.5"
               strokeLinecap="round"
               strokeLinejoin="round"
             />
