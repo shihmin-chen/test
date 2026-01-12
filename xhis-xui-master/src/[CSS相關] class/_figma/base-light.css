@@ -1,0 +1,611 @@
+/**
+ * file generated from figma-plugin-extractor.
+ * [Format Style]: Prettier
+ * https://github.com/hikariNTU/figma-plugin-extractor
+ */
+:root {
+  --xv-container--background--rgb: 217, 217, 219;
+  --xv-container--background: rgb(
+    var(--xv-container--background--rgb),
+    var(--xv-container--background--a, 1)
+  );
+  --xv-container--tinted-surface--rgb: 242, 242, 242;
+  --xv-container--tinted-surface: rgb(
+    var(--xv-container--tinted-surface--rgb),
+    var(--xv-container--tinted-surface--a, 1)
+  );
+  --xv-container--surface--rgb: 242, 242, 242;
+  --xv-container--surface: rgb(
+    var(--xv-container--surface--rgb),
+    var(--xv-container--surface--a, 1)
+  );
+  --xv-container--surface-hovered--rgb: 26, 26, 26;
+  --xv-container--surface-hovered--a: 0.12;
+  --xv-container--surface-hovered: rgb(
+    var(--xv-container--surface-hovered--rgb),
+    var(--xv-container--surface-hovered--a, 1)
+  );
+  --xv-container--surface-pressed--rgb: 26, 26, 26;
+  --xv-container--surface-pressed--a: 0.2;
+  --xv-container--surface-pressed: rgb(
+    var(--xv-container--surface-pressed--rgb),
+    var(--xv-container--surface-pressed--a, 1)
+  );
+  --xv-container--surface-active--rgb: 109, 174, 237;
+  --xv-container--surface-active--a: 0.5;
+  --xv-container--surface-active: rgb(
+    var(--xv-container--surface-active--rgb),
+    var(--xv-container--surface-active--a, 1)
+  );
+  --xv-container--surface-active-hovered--rgb: 109, 174, 237;
+  --xv-container--surface-active-hovered--a: 0.7;
+  --xv-container--surface-active-hovered: rgb(
+    var(--xv-container--surface-active-hovered--rgb),
+    var(--xv-container--surface-active-hovered--a, 1)
+  );
+  --xv-container--surface-active-pressed--rgb: 109, 174, 237;
+  --xv-container--surface-active-pressed--a: 0.86;
+  --xv-container--surface-active-pressed: rgb(
+    var(--xv-container--surface-active-pressed--rgb),
+    var(--xv-container--surface-active-pressed--a, 1)
+  );
+  --xv-container--area--rgb: 26, 26, 26;
+  --xv-container--area--a: 0.16;
+  --xv-container--area: rgb(
+    var(--xv-container--area--rgb),
+    var(--xv-container--area--a, 1)
+  );
+  --xv-container--area-hovered--rgb: 26, 26, 26;
+  --xv-container--area-hovered--a: 0.22;
+  --xv-container--area-hovered: rgb(
+    var(--xv-container--area-hovered--rgb),
+    var(--xv-container--area-hovered--a, 1)
+  );
+  --xv-container--area-pressed--rgb: 26, 26, 26;
+  --xv-container--area-pressed--a: 0.3;
+  --xv-container--area-pressed: rgb(
+    var(--xv-container--area-pressed--rgb),
+    var(--xv-container--area-pressed--a, 1)
+  );
+  --xv-container--area-active--rgb: 109, 174, 237;
+  --xv-container--area-active--a: 0.6;
+  --xv-container--area-active: rgb(
+    var(--xv-container--area-active--rgb),
+    var(--xv-container--area-active--a, 1)
+  );
+  --xv-container--area-active-hovered--rgb: 109, 174, 237;
+  --xv-container--area-active-hovered--a: 0.76;
+  --xv-container--area-active-hovered: rgb(
+    var(--xv-container--area-active-hovered--rgb),
+    var(--xv-container--area-active-hovered--a, 1)
+  );
+  --xv-container--area-active-pressed--rgb: 109, 174, 237;
+  --xv-container--area-active-pressed--a: 0.9;
+  --xv-container--area-active-pressed: rgb(
+    var(--xv-container--area-active-pressed--rgb),
+    var(--xv-container--area-active-pressed--a, 1)
+  );
+  --xv-container--disabled-background--rgb: 26, 26, 26;
+  --xv-container--disabled-background--a: 0.09;
+  --xv-container--disabled-background: rgb(
+    var(--xv-container--disabled-background--rgb),
+    var(--xv-container--disabled-background--a, 1)
+  );
+  --xv-container--mask--rgb: 26, 26, 26;
+  --xv-container--mask--a: 0.35;
+  --xv-container--mask: rgb(
+    var(--xv-container--mask--rgb),
+    var(--xv-container--mask--a, 1)
+  );
+  --xv-text--high-emphasis-text--rgb: 26, 26, 26;
+  --xv-text--high-emphasis-text: rgb(
+    var(--xv-text--high-emphasis-text--rgb),
+    var(--xv-text--high-emphasis-text--a, 1)
+  );
+  --xv-text--medium-emphasis-text--rgb: 26, 26, 26;
+  --xv-text--medium-emphasis-text--a: 0.7;
+  --xv-text--medium-emphasis-text: rgb(
+    var(--xv-text--medium-emphasis-text--rgb),
+    var(--xv-text--medium-emphasis-text--a, 1)
+  );
+  --xv-text--low-emphasis-text--rgb: 26, 26, 26;
+  --xv-text--low-emphasis-text--a: 0.55;
+  --xv-text--low-emphasis-text: rgb(
+    var(--xv-text--low-emphasis-text--rgb),
+    var(--xv-text--low-emphasis-text--a, 1)
+  );
+  --xv-text--placeholder-text--rgb: 26, 26, 26;
+  --xv-text--placeholder-text--a: 0.45;
+  --xv-text--placeholder-text: rgb(
+    var(--xv-text--placeholder-text--rgb),
+    var(--xv-text--placeholder-text--a, 1)
+  );
+  --xv-text--disabled-text--rgb: 26, 26, 26;
+  --xv-text--disabled-text--a: 0.35;
+  --xv-text--disabled-text: rgb(
+    var(--xv-text--disabled-text--rgb),
+    var(--xv-text--disabled-text--a, 1)
+  );
+  --xv-text--dividing-line--rgb: 26, 26, 26;
+  --xv-text--dividing-line--a: 0.3;
+  --xv-text--dividing-line: rgb(
+    var(--xv-text--dividing-line--rgb),
+    var(--xv-text--dividing-line--a, 1)
+  );
+  --xv-text--on-background-text--rgb: 242, 242, 242;
+  --xv-text--on-background-text: rgb(
+    var(--xv-text--on-background-text--rgb),
+    var(--xv-text--on-background-text--a, 1)
+  );
+  --xv-status--primary--rgb: 0, 103, 204;
+  --xv-status--primary: rgb(
+    var(--xv-status--primary--rgb),
+    var(--xv-status--primary--a, 1)
+  );
+  --xv-status--primary-on-surface--rgb: 0, 87, 173;
+  --xv-status--primary-on-surface: rgb(
+    var(--xv-status--primary-on-surface--rgb),
+    var(--xv-status--primary-on-surface--a, 1)
+  );
+  --xv-status--primary-surface--rgb: 109, 174, 237;
+  --xv-status--primary-surface--a: 0.38;
+  --xv-status--primary-surface: rgb(
+    var(--xv-status--primary-surface--rgb),
+    var(--xv-status--primary-surface--a, 1)
+  );
+  --xv-status--primary-surface-hovered--rgb: 109, 174, 237;
+  --xv-status--primary-surface-hovered--a: 0.56;
+  --xv-status--primary-surface-hovered: rgb(
+    var(--xv-status--primary-surface-hovered--rgb),
+    var(--xv-status--primary-surface-hovered--a, 1)
+  );
+  --xv-status--primary-surface-pressed--rgb: 109, 174, 237;
+  --xv-status--primary-surface-pressed--a: 0.72;
+  --xv-status--primary-surface-pressed: rgb(
+    var(--xv-status--primary-surface-pressed--rgb),
+    var(--xv-status--primary-surface-pressed--a, 1)
+  );
+  --xv-status--error--rgb: 191, 46, 58;
+  --xv-status--error: rgb(
+    var(--xv-status--error--rgb),
+    var(--xv-status--error--a, 1)
+  );
+  --xv-status--error-on-surface--rgb: 181, 24, 37;
+  --xv-status--error-on-surface: rgb(
+    var(--xv-status--error-on-surface--rgb),
+    var(--xv-status--error-on-surface--a, 1)
+  );
+  --xv-status--error-surface--rgb: 245, 120, 130;
+  --xv-status--error-surface--a: 0.38;
+  --xv-status--error-surface: rgb(
+    var(--xv-status--error-surface--rgb),
+    var(--xv-status--error-surface--a, 1)
+  );
+  --xv-status--error-surface-hovered--rgb: 245, 120, 130;
+  --xv-status--error-surface-hovered--a: 0.56;
+  --xv-status--error-surface-hovered: rgb(
+    var(--xv-status--error-surface-hovered--rgb),
+    var(--xv-status--error-surface-hovered--a, 1)
+  );
+  --xv-status--error-surface-pressed--rgb: 245, 120, 130;
+  --xv-status--error-surface-pressed--a: 0.72;
+  --xv-status--error-surface-pressed: rgb(
+    var(--xv-status--error-surface-pressed--rgb),
+    var(--xv-status--error-surface-pressed--a, 1)
+  );
+  --xv-status--warning--rgb: 168, 84, 0;
+  --xv-status--warning: rgb(
+    var(--xv-status--warning--rgb),
+    var(--xv-status--warning--a, 1)
+  );
+  --xv-status--warning-on-surface--rgb: 140, 70, 0;
+  --xv-status--warning-on-surface: rgb(
+    var(--xv-status--warning-on-surface--rgb),
+    var(--xv-status--warning-on-surface--a, 1)
+  );
+  --xv-status--warning-surface--rgb: 242, 155, 48;
+  --xv-status--warning-surface--a: 0.38;
+  --xv-status--warning-surface: rgb(
+    var(--xv-status--warning-surface--rgb),
+    var(--xv-status--warning-surface--a, 1)
+  );
+  --xv-status--warning-surface-hovered--rgb: 242, 155, 48;
+  --xv-status--warning-surface-hovered--a: 0.56;
+  --xv-status--warning-surface-hovered: rgb(
+    var(--xv-status--warning-surface-hovered--rgb),
+    var(--xv-status--warning-surface-hovered--a, 1)
+  );
+  --xv-status--warning-surface-pressed--rgb: 242, 155, 48;
+  --xv-status--warning-surface-pressed--a: 0.72;
+  --xv-status--warning-surface-pressed: rgb(
+    var(--xv-status--warning-surface-pressed--rgb),
+    var(--xv-status--warning-surface-pressed--a, 1)
+  );
+  --xv-status--success--rgb: 9, 122, 31;
+  --xv-status--success: rgb(
+    var(--xv-status--success--rgb),
+    var(--xv-status--success--a, 1)
+  );
+  --xv-status--success-on-surface--rgb: 0, 107, 22;
+  --xv-status--success-on-surface: rgb(
+    var(--xv-status--success-on-surface--rgb),
+    var(--xv-status--success-on-surface--a, 1)
+  );
+  --xv-status--success-surface--rgb: 89, 194, 103;
+  --xv-status--success-surface--a: 0.38;
+  --xv-status--success-surface: rgb(
+    var(--xv-status--success-surface--rgb),
+    var(--xv-status--success-surface--a, 1)
+  );
+  --xv-status--success-surface-hovered--rgb: 89, 194, 103;
+  --xv-status--success-surface-hovered--a: 0.56;
+  --xv-status--success-surface-hovered: rgb(
+    var(--xv-status--success-surface-hovered--rgb),
+    var(--xv-status--success-surface-hovered--a, 1)
+  );
+  --xv-status--success-surface-pressed--rgb: 89, 194, 103;
+  --xv-status--success-surface-pressed--a: 0.72;
+  --xv-status--success-surface-pressed: rgb(
+    var(--xv-status--success-surface-pressed--rgb),
+    var(--xv-status--success-surface-pressed--a, 1)
+  );
+  --xv-primary--900--rgb: 3, 34, 65;
+  --xv-primary--900: rgb(
+    var(--xv-primary--900--rgb),
+    var(--xv-primary--900--a, 1)
+  );
+  --xv-primary--800--rgb: 0, 63, 125;
+  --xv-primary--800: rgb(
+    var(--xv-primary--800--rgb),
+    var(--xv-primary--800--a, 1)
+  );
+  --xv-primary--700--rgb: 0, 87, 173;
+  --xv-primary--700: rgb(
+    var(--xv-primary--700--rgb),
+    var(--xv-primary--700--a, 1)
+  );
+  --xv-primary--600--rgb: 0, 103, 204;
+  --xv-primary--600: rgb(
+    var(--xv-primary--600--rgb),
+    var(--xv-primary--600--a, 1)
+  );
+  --xv-primary--500--rgb: 22, 121, 217;
+  --xv-primary--500: rgb(
+    var(--xv-primary--500--rgb),
+    var(--xv-primary--500--a, 1)
+  );
+  --xv-primary--400--rgb: 47, 143, 235;
+  --xv-primary--400: rgb(
+    var(--xv-primary--400--rgb),
+    var(--xv-primary--400--a, 1)
+  );
+  --xv-primary--300--rgb: 109, 174, 237;
+  --xv-primary--300: rgb(
+    var(--xv-primary--300--rgb),
+    var(--xv-primary--300--a, 1)
+  );
+  --xv-primary--200--rgb: 139, 193, 247;
+  --xv-primary--200: rgb(
+    var(--xv-primary--200--rgb),
+    var(--xv-primary--200--a, 1)
+  );
+  --xv-primary--150--rgb: 157, 204, 250;
+  --xv-primary--150: rgb(
+    var(--xv-primary--150--rgb),
+    var(--xv-primary--150--a, 1)
+  );
+  --xv-primary--100--rgb: 181, 214, 247;
+  --xv-primary--100: rgb(
+    var(--xv-primary--100--rgb),
+    var(--xv-primary--100--a, 1)
+  );
+  --xv-primary--50--rgb: 222, 237, 252;
+  --xv-primary--50: rgb(
+    var(--xv-primary--50--rgb),
+    var(--xv-primary--50--a, 1)
+  );
+  --xv-blackandwhite--white--rgb: 255, 255, 255;
+  --xv-blackandwhite--white: rgb(
+    var(--xv-blackandwhite--white--rgb),
+    var(--xv-blackandwhite--white--a, 1)
+  );
+  --xv-blackandwhite--black--rgb: 0, 0, 0;
+  --xv-blackandwhite--black: rgb(
+    var(--xv-blackandwhite--black--rgb),
+    var(--xv-blackandwhite--black--a, 1)
+  );
+  --xv-neutral--900--rgb: 38, 38, 38;
+  --xv-neutral--900: rgb(
+    var(--xv-neutral--900--rgb),
+    var(--xv-neutral--900--a, 1)
+  );
+  --xv-neutral--800--rgb: 51, 51, 51;
+  --xv-neutral--800: rgb(
+    var(--xv-neutral--800--rgb),
+    var(--xv-neutral--800--a, 1)
+  );
+  --xv-neutral--700--rgb: 71, 71, 71;
+  --xv-neutral--700: rgb(
+    var(--xv-neutral--700--rgb),
+    var(--xv-neutral--700--a, 1)
+  );
+  --xv-neutral--600--rgb: 84, 84, 84;
+  --xv-neutral--600: rgb(
+    var(--xv-neutral--600--rgb),
+    var(--xv-neutral--600--a, 1)
+  );
+  --xv-neutral--500--rgb: 110, 110, 110;
+  --xv-neutral--500: rgb(
+    var(--xv-neutral--500--rgb),
+    var(--xv-neutral--500--a, 1)
+  );
+  --xv-neutral--400--rgb: 130, 130, 130;
+  --xv-neutral--400: rgb(
+    var(--xv-neutral--400--rgb),
+    var(--xv-neutral--400--a, 1)
+  );
+  --xv-neutral--300--rgb: 153, 153, 153;
+  --xv-neutral--300: rgb(
+    var(--xv-neutral--300--rgb),
+    var(--xv-neutral--300--a, 1)
+  );
+  --xv-neutral--200--rgb: 181, 181, 181;
+  --xv-neutral--200: rgb(
+    var(--xv-neutral--200--rgb),
+    var(--xv-neutral--200--a, 1)
+  );
+  --xv-neutral--150--rgb: 194, 194, 194;
+  --xv-neutral--150: rgb(
+    var(--xv-neutral--150--rgb),
+    var(--xv-neutral--150--a, 1)
+  );
+  --xv-neutral--100--rgb: 209, 209, 209;
+  --xv-neutral--100: rgb(
+    var(--xv-neutral--100--rgb),
+    var(--xv-neutral--100--a, 1)
+  );
+  --xv-neutral--50--rgb: 235, 235, 235;
+  --xv-neutral--50: rgb(
+    var(--xv-neutral--50--rgb),
+    var(--xv-neutral--50--a, 1)
+  );
+  --xv-neutralvariant--100--rgb: 230, 228, 235;
+  --xv-neutralvariant--100: rgb(
+    var(--xv-neutralvariant--100--rgb),
+    var(--xv-neutralvariant--100--a, 1)
+  );
+  --xv-neutralvariant--50--rgb: 241, 240, 244;
+  --xv-neutralvariant--50: rgb(
+    var(--xv-neutralvariant--50--rgb),
+    var(--xv-neutralvariant--50--a, 1)
+  );
+  --xv-red--900--rgb: 71, 0, 5;
+  --xv-red--900: rgb(var(--xv-red--900--rgb), var(--xv-red--900--a, 1));
+  --xv-red--800--rgb: 135, 16, 26;
+  --xv-red--800: rgb(var(--xv-red--800--rgb), var(--xv-red--800--a, 1));
+  --xv-red--700--rgb: 181, 24, 37;
+  --xv-red--700: rgb(var(--xv-red--700--rgb), var(--xv-red--700--a, 1));
+  --xv-red--600--rgb: 191, 46, 58;
+  --xv-red--600: rgb(var(--xv-red--600--rgb), var(--xv-red--600--a, 1));
+  --xv-red--500--rgb: 212, 63, 76;
+  --xv-red--500: rgb(var(--xv-red--500--rgb), var(--xv-red--500--a, 1));
+  --xv-red--400--rgb: 232, 86, 98;
+  --xv-red--400: rgb(var(--xv-red--400--rgb), var(--xv-red--400--a, 1));
+  --xv-red--300--rgb: 245, 120, 130;
+  --xv-red--300: rgb(var(--xv-red--300--rgb), var(--xv-red--300--a, 1));
+  --xv-red--200--rgb: 245, 149, 157;
+  --xv-red--200: rgb(var(--xv-red--200--rgb), var(--xv-red--200--a, 1));
+  --xv-red--150--rgb: 247, 178, 183;
+  --xv-red--150: rgb(var(--xv-red--150--rgb), var(--xv-red--150--a, 1));
+  --xv-red--100--rgb: 250, 200, 204;
+  --xv-red--100: rgb(var(--xv-red--100--rgb), var(--xv-red--100--a, 1));
+  --xv-red--50--rgb: 250, 227, 229;
+  --xv-red--50: rgb(var(--xv-red--50--rgb), var(--xv-red--50--a, 1));
+  --xv-orange--900--rgb: 54, 32, 0;
+  --xv-orange--900: rgb(
+    var(--xv-orange--900--rgb),
+    var(--xv-orange--900--a, 1)
+  );
+  --xv-orange--800--rgb: 103, 56, 0;
+  --xv-orange--800: rgb(
+    var(--xv-orange--800--rgb),
+    var(--xv-orange--800--a, 1)
+  );
+  --xv-orange--700--rgb: 140, 70, 0;
+  --xv-orange--700: rgb(
+    var(--xv-orange--700--rgb),
+    var(--xv-orange--700--a, 1)
+  );
+  --xv-orange--600--rgb: 168, 84, 0;
+  --xv-orange--600: rgb(
+    var(--xv-orange--600--rgb),
+    var(--xv-orange--600--a, 1)
+  );
+  --xv-orange--500--rgb: 200, 107, 0;
+  --xv-orange--500: rgb(
+    var(--xv-orange--500--rgb),
+    var(--xv-orange--500--a, 1)
+  );
+  --xv-orange--400--rgb: 227, 130, 18;
+  --xv-orange--400: rgb(
+    var(--xv-orange--400--rgb),
+    var(--xv-orange--400--a, 1)
+  );
+  --xv-orange--300--rgb: 242, 155, 48;
+  --xv-orange--300: rgb(
+    var(--xv-orange--300--rgb),
+    var(--xv-orange--300--a, 1)
+  );
+  --xv-orange--200--rgb: 252, 177, 86;
+  --xv-orange--200: rgb(
+    var(--xv-orange--200--rgb),
+    var(--xv-orange--200--a, 1)
+  );
+  --xv-orange--150--rgb: 246, 192, 120;
+  --xv-orange--150: rgb(
+    var(--xv-orange--150--rgb),
+    var(--xv-orange--150--a, 1)
+  );
+  --xv-orange--100--rgb: 255, 209, 143;
+  --xv-orange--100: rgb(
+    var(--xv-orange--100--rgb),
+    var(--xv-orange--100--a, 1)
+  );
+  --xv-orange--50--rgb: 252, 232, 202;
+  --xv-orange--50: rgb(var(--xv-orange--50--rgb), var(--xv-orange--50--a, 1));
+  --xv-yellow--900--rgb: 107, 85, 4;
+  --xv-yellow--900: rgb(
+    var(--xv-yellow--900--rgb),
+    var(--xv-yellow--900--a, 1)
+  );
+  --xv-yellow--800--rgb: 139, 111, 9;
+  --xv-yellow--800: rgb(
+    var(--xv-yellow--800--rgb),
+    var(--xv-yellow--800--a, 1)
+  );
+  --xv-yellow--700--rgb: 181, 143, 7;
+  --xv-yellow--700: rgb(
+    var(--xv-yellow--700--rgb),
+    var(--xv-yellow--700--a, 1)
+  );
+  --xv-yellow--600--rgb: 232, 184, 9;
+  --xv-yellow--600: rgb(
+    var(--xv-yellow--600--rgb),
+    var(--xv-yellow--600--a, 1)
+  );
+  --xv-yellow--500--rgb: 255, 202, 10;
+  --xv-yellow--500: rgb(
+    var(--xv-yellow--500--rgb),
+    var(--xv-yellow--500--a, 1)
+  );
+  --xv-yellow--400--rgb: 255, 213, 59;
+  --xv-yellow--400: rgb(
+    var(--xv-yellow--400--rgb),
+    var(--xv-yellow--400--a, 1)
+  );
+  --xv-yellow--300--rgb: 255, 219, 91;
+  --xv-yellow--300: rgb(
+    var(--xv-yellow--300--rgb),
+    var(--xv-yellow--300--a, 1)
+  );
+  --xv-yellow--200--rgb: 255, 231, 142;
+  --xv-yellow--200: rgb(
+    var(--xv-yellow--200--rgb),
+    var(--xv-yellow--200--a, 1)
+  );
+  --xv-yellow--100--rgb: 255, 239, 179;
+  --xv-yellow--100: rgb(
+    var(--xv-yellow--100--rgb),
+    var(--xv-yellow--100--a, 1)
+  );
+  --xv-yellow--50--rgb: 255, 250, 231;
+  --xv-yellow--50: rgb(var(--xv-yellow--50--rgb), var(--xv-yellow--50--a, 1));
+  --xv-green--900--rgb: 0, 43, 9;
+  --xv-green--900: rgb(var(--xv-green--900--rgb), var(--xv-green--900--a, 1));
+  --xv-green--800--rgb: 0, 78, 16;
+  --xv-green--800: rgb(var(--xv-green--800--rgb), var(--xv-green--800--a, 1));
+  --xv-green--700--rgb: 0, 107, 22;
+  --xv-green--700: rgb(var(--xv-green--700--rgb), var(--xv-green--700--a, 1));
+  --xv-green--600--rgb: 9, 122, 31;
+  --xv-green--600: rgb(var(--xv-green--600--rgb), var(--xv-green--600--a, 1));
+  --xv-green--500--rgb: 20, 153, 47;
+  --xv-green--500: rgb(var(--xv-green--500--rgb), var(--xv-green--500--a, 1));
+  --xv-green--400--rgb: 40, 173, 58;
+  --xv-green--400: rgb(var(--xv-green--400--rgb), var(--xv-green--400--a, 1));
+  --xv-green--300--rgb: 89, 194, 103;
+  --xv-green--300: rgb(var(--xv-green--300--rgb), var(--xv-green--300--a, 1));
+  --xv-green--200--rgb: 132, 209, 142;
+  --xv-green--200: rgb(var(--xv-green--200--rgb), var(--xv-green--200--a, 1));
+  --xv-green--150--rgb: 150, 217, 159;
+  --xv-green--150: rgb(var(--xv-green--150--rgb), var(--xv-green--150--a, 1));
+  --xv-green--100--rgb: 177, 229, 187;
+  --xv-green--100: rgb(var(--xv-green--100--rgb), var(--xv-green--100--a, 1));
+  --xv-green--50--rgb: 218, 245, 224;
+  --xv-green--50: rgb(var(--xv-green--50--rgb), var(--xv-green--50--a, 1));
+  --xv-teal--900--rgb: 1, 42, 46;
+  --xv-teal--900: rgb(var(--xv-teal--900--rgb), var(--xv-teal--900--a, 1));
+  --xv-teal--800--rgb: 0, 73, 79;
+  --xv-teal--800: rgb(var(--xv-teal--800--rgb), var(--xv-teal--800--a, 1));
+  --xv-teal--700--rgb: 2, 101, 110;
+  --xv-teal--700: rgb(var(--xv-teal--700--rgb), var(--xv-teal--700--a, 1));
+  --xv-teal--600--rgb: 4, 118, 128;
+  --xv-teal--600: rgb(var(--xv-teal--600--rgb), var(--xv-teal--600--a, 1));
+  --xv-teal--500--rgb: 16, 147, 158;
+  --xv-teal--500: rgb(var(--xv-teal--500--rgb), var(--xv-teal--500--a, 1));
+  --xv-teal--400--rgb: 46, 165, 176;
+  --xv-teal--400: rgb(var(--xv-teal--400--rgb), var(--xv-teal--400--a, 1));
+  --xv-teal--300--rgb: 64, 188, 199;
+  --xv-teal--300: rgb(var(--xv-teal--300--rgb), var(--xv-teal--300--a, 1));
+  --xv-teal--200--rgb: 123, 205, 212;
+  --xv-teal--200: rgb(var(--xv-teal--200--rgb), var(--xv-teal--200--a, 1));
+  --xv-teal--150--rgb: 143, 213, 219;
+  --xv-teal--150: rgb(var(--xv-teal--150--rgb), var(--xv-teal--150--a, 1));
+  --xv-teal--100--rgb: 165, 224, 229;
+  --xv-teal--100: rgb(var(--xv-teal--100--rgb), var(--xv-teal--100--a, 1));
+  --xv-teal--50--rgb: 220, 240, 242;
+  --xv-teal--50: rgb(var(--xv-teal--50--rgb), var(--xv-teal--50--a, 1));
+  --xv-violet--900--rgb: 34, 0, 94;
+  --xv-violet--900: rgb(
+    var(--xv-violet--900--rgb),
+    var(--xv-violet--900--a, 1)
+  );
+  --xv-violet--800--rgb: 70, 37, 128;
+  --xv-violet--800: rgb(
+    var(--xv-violet--800--rgb),
+    var(--xv-violet--800--a, 1)
+  );
+  --xv-violet--700--rgb: 94, 57, 158;
+  --xv-violet--700: rgb(
+    var(--xv-violet--700--rgb),
+    var(--xv-violet--700--a, 1)
+  );
+  --xv-violet--600--rgb: 111, 77, 171;
+  --xv-violet--600: rgb(
+    var(--xv-violet--600--rgb),
+    var(--xv-violet--600--a, 1)
+  );
+  --xv-violet--500--rgb: 132, 97, 194;
+  --xv-violet--500: rgb(
+    var(--xv-violet--500--rgb),
+    var(--xv-violet--500--a, 1)
+  );
+  --xv-violet--400--rgb: 152, 119, 209;
+  --xv-violet--400: rgb(
+    var(--xv-violet--400--rgb),
+    var(--xv-violet--400--a, 1)
+  );
+  --xv-violet--300--rgb: 173, 144, 224;
+  --xv-violet--300: rgb(
+    var(--xv-violet--300--rgb),
+    var(--xv-violet--300--a, 1)
+  );
+  --xv-violet--200--rgb: 201, 180, 237;
+  --xv-violet--200: rgb(
+    var(--xv-violet--200--rgb),
+    var(--xv-violet--200--a, 1)
+  );
+  --xv-violet--150--rgb: 210, 191, 242;
+  --xv-violet--150: rgb(
+    var(--xv-violet--150--rgb),
+    var(--xv-violet--150--a, 1)
+  );
+  --xv-violet--100--rgb: 217, 201, 245;
+  --xv-violet--100: rgb(
+    var(--xv-violet--100--rgb),
+    var(--xv-violet--100--a, 1)
+  );
+  --xv-violet--50--rgb: 236, 233, 242;
+  --xv-violet--50: rgb(var(--xv-violet--50--rgb), var(--xv-violet--50--a, 1));
+  --xv-chart--01--rgb: 84, 156, 234;
+  --xv-chart--01: rgb(var(--xv-chart--01--rgb), var(--xv-chart--01--a, 1));
+  --xv-chart--02--rgb: 121, 211, 219;
+  --xv-chart--02: rgb(var(--xv-chart--02--rgb), var(--xv-chart--02--a, 1));
+  --xv-chart--03--rgb: 255, 141, 111;
+  --xv-chart--03: rgb(var(--xv-chart--03--rgb), var(--xv-chart--03--a, 1));
+  --xv-chart--04--rgb: 106, 120, 199;
+  --xv-chart--04: rgb(var(--xv-chart--04--rgb), var(--xv-chart--04--a, 1));
+  --xv-chart--05--rgb: 241, 161, 93;
+  --xv-chart--05: rgb(var(--xv-chart--05--rgb), var(--xv-chart--05--a, 1));
+  --xv-chart--06--rgb: 158, 158, 158;
+  --xv-chart--06: rgb(var(--xv-chart--06--rgb), var(--xv-chart--06--a, 1));
+}

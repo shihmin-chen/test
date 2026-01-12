@@ -1,0 +1,53 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ContextMenu Snapshot Test 1`] = `
+<section
+  class="x-list x-scroll-bar x-scroll-bar-lg x-list--md"
+  role="list"
+  style="--x-list-max-w: unset; --x-list-min-w: 0; --x-list-max-h: unset;"
+>
+  <!--v-if-->
+  
+  
+  
+  <!--v-if-->
+  
+  <div
+    aria-disabled="false"
+    class="x-list-item-li x-list-item-li-interactive"
+    role="listiem"
+  >
+    <div
+      class="x-list-item x-list-item--md"
+      style="--x-list-item-align-items: center;"
+    >
+      
+      fakeName_0
+      
+    </div>
+    <!-- list item divider not yet defined in design system -->
+    <!--v-if-->
+  </div>
+  <div
+    aria-disabled="true"
+    class="x-list-item-li x-list-item-li-interactive"
+    role="listiem"
+  >
+    <div
+      class="x-list-item x-list-item--md"
+      style="--x-list-item-align-items: center;"
+    >
+      
+      fakeName_1
+      
+    </div>
+    <!-- list item divider not yet defined in design system -->
+    <!--v-if-->
+  </div>
+  
+  
+  
+  
+  <!-- We do not use ul as root el for this possible issue: https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Roles/listitem_role#best_practices -->
+</section>
+`;

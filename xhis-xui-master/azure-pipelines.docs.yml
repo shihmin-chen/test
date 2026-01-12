@@ -1,0 +1,37 @@
+name: $(SourceBranchName)_$(Date:yyyyMMdd)$(Rev:.r)
+
+trigger:
+  branches:
+    include:
+      - master
+
+pr: none
+
+pool:
+  vmImage: 'windows-latest'
+
+steps:
+  - task: NodeTool@0
+    displayName: 'Install Node.js'
+    inputs:
+      versionSpec: '18.x'
+
+  - task: Npm@1
+    inputs:
+      command: 'install'
+      customEndpoint: 'npm-aics-reg'
+
+  - task: Npm@1
+    displayName: 'Build Storybook'
+    inputs:
+      command: 'custom'
+      customCommand: 'run build-storybook'
+
+  - task: AzureFileCopy@6
+    displayName: 'Deploy xUI Storybook to Blob Storage'
+    inputs:
+      SourcePath: 'xui-storybook'
+      azureSubscription: 'ASUS AICS ASUSCARE (c5bf4511-37e2-475a-90f1-0dba9c3b7c26)'
+      Destination: 'AzureBlob'
+      storage: xhisdocs
+      ContainerName: $web

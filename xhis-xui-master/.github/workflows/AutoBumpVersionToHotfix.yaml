@@ -1,0 +1,91 @@
+name: AutoBumpVersionToHotfix
+
+on:
+  push:
+    branches:
+      - hotfix/*
+    paths:
+      ## only triggered by source code change in each package
+      - "**/*"
+      - "!package.json"
+      - "!package-lock.json"
+
+concurrency:
+  group: ci-${{ github.ref }}
+
+jobs:
+  auto-bump-version:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code to hotfix/* branch
+        uses: actions/checkout@v3
+        with:
+          ref: ${{ github.ref }}
+          fetch-depth: 0
+
+      - name: Configure committer
+        run: |
+          git config user.name "GitHub Actions Bot"
+          git config user.email "<>"
+
+      - name: Setup node
+        uses: actions/setup-node@v2
+        with:
+          node-version: "20.16.0"
+          registry-url: "https://npm.pkg.github.com"
+          scope: "@asus-aics"
+
+      - name: Install python3
+        run: |
+          sudo apt-get install -y python3
+
+      - name: Bump version of target packages
+        run: |
+          targetPkgs="packages/xui"
+          branchNameWithoutPrefix=${GITHUB_REF#refs/heads/hotfix/}
+
+          for pkg in $(echo $targetPkgs | tr "|" "\n")
+          do
+            packageName=$(cat ./package.json | grep name | head -1 | awk -F: '{ print $2 }' | sed 's/[",]//g' | tr -d '[[:space:]]')
+            curVersion=$(cat ./package.json | grep version | head -1 | awk -F: '{ print $2 }' | sed 's/[",]//g' | tr -d '[[:space:]]')
+            echo "$packageName (cur: $curVersion)"
+
+            # determine increment method
+            # (prepatch/prerelease)  : 1.0.5           -> 1.0.6-hotfix.0
+            # (prerelease)           : 1.0.6-hotfix.0  -> 1.0.6-hotfix.1
+            preid="$branchNameWithoutPrefix"
+            increment=prerelease
+
+            # bump version
+            newVersion=$(npm version $increment --preid $preid --no-git-tag-version)
+            git commit -am "chore($pkg): bump version from 'v$curVersion' to '$newVersion'"
+
+            echo "==============="
+          done
+
+      - name: Create Pull Request
+        id: cpr
+        uses: peter-evans/create-pull-request@v5
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          title: "chore: auto bump version to ${{ github.ref }}"
+
+      - name: Check outputs
+        if: ${{ steps.cpr.outputs.pull-request-number }}
+        run: |
+          echo "Pull Request Number - ${{ steps.cpr.outputs.pull-request-number }}"
+          echo "Pull Request URL - ${{ steps.cpr.outputs.pull-request-url }}"
+          echo "Pull Request Operation - ${{ steps.cpr.outputs.pull-request-operation }}"
+
+      - name: Enable Automerge
+        uses: peter-evans/enable-pull-request-automerge@v2
+        with:
+          token: ${{ secrets.REVIEW_TOKEN }}
+          pull-request-number: ${{ steps.cpr.outputs.pull-request-number }}
+          merge-method: squash
+
+      - name: Auto approve
+        uses: juliangruber/approve-pull-request-action@v1
+        with:
+          github-token: ${{ secrets.REVIEW_TOKEN }}
+          number: ${{ steps.cpr.outputs.pull-request-number }}

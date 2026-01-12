@@ -1,0 +1,105 @@
+name: AutoBumpVersionToMasterFromProduction
+
+on:
+  workflow_run:
+    workflows: [PublishPkgs]
+    types: [completed]
+    branches: [production]
+
+concurrency:
+  group: ci-${{ github.ref }}
+
+jobs:
+  auto-bump-version:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Configure committer
+        run: |
+          git config user.name "GitHub Actions Bot"
+          git config user.email "<>"
+
+      - name: Setup node
+        uses: actions/setup-node@v2
+        with:
+          node-version: "20.16.0"
+          registry-url: "https://npm.pkg.github.com"
+          scope: "@asus-aics"
+
+      - name: Bump packages version that @master-latest version is a release candidate of @latest version
+        id: check
+        run: |
+          ## (production) package@latest: 1.3.0
+          ## (master) package@master-latest: 1.3.0-master.10
+          ## It means package in master branch should be bumped to 1.4.0-master.0
+
+          ## packages should be in production branch
+          packageList=(
+            packages/xui
+          )
+
+          hasChanged=false
+
+          for pkg in ${packageList[@]}
+          do
+              packageName=$(cat ./package.json | grep name | head -1 | awk -F: '{ print $2 }' | sed 's/[",]//g' | tr -d '[[:space:]]')
+              isPrivate=$(cat ./package.json | grep private | head -1 | awk -F: '{ print $2 }' | sed 's/[",]//g' | tr -d '[[:space:]]')
+              
+              if [[ "$isPrivate" = true ]]; then
+                  continue
+              fi
+
+              masterLatestVersion=$(npm view ${packageName}@master-latest version)
+              latestVersion=$(npm view ${packageName}@latest version)
+              echo "$packageName (@master-latest: $masterLatestVersion, @latest: $latestVersion)"
+
+              # determine increment method
+              # (preminor): 1.1.6-master.4 -> 1.2.0-master.0
+              preid="master"
+              increment=preminor
+
+              # bump version
+              if [[ -n "$masterLatestVersion" && -n "$latestVersion" && "$masterLatestVersion" == *"$latestVersion"* ]]; then
+                  newVersion=$(npm version $increment --preid $preid --no-git-tag-version)
+                  git commit -am "chore($pkg): bump version from 'v$masterLatestVersion' to '$newVersion'"
+                  hasChanged=true
+              fi
+
+              echo "==============="
+          done
+
+          echo "has-changed=$hasChanged"
+          echo "has-changed=$hasChanged" >> $GITHUB_OUTPUT
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Create Pull Request
+        id: cpr
+        uses: peter-evans/create-pull-request@v5
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          title: "chore: auto bump version to ${{ github.ref }} from production"
+
+      - name: Check outputs
+        if: ${{ steps.cpr.outputs.pull-request-number }}
+        run: |
+          echo "Pull Request Number - ${{ steps.cpr.outputs.pull-request-number }}"
+          echo "Pull Request URL - ${{ steps.cpr.outputs.pull-request-url }}"
+          echo "Pull Request Operation - ${{ steps.cpr.outputs.pull-request-operation }}"
+
+      - name: Enable Automerge
+        if: ${{ steps.cpr.outputs.pull-request-number }}
+        uses: peter-evans/enable-pull-request-automerge@v2
+        with:
+          token: ${{ secrets.REVIEW_TOKEN }}
+          pull-request-number: ${{ steps.cpr.outputs.pull-request-number }}
+          merge-method: squash
+
+      - name: Auto approve
+        if: ${{ steps.cpr.outputs.pull-request-number }}
+        uses: juliangruber/approve-pull-request-action@v1
+        with:
+          github-token: ${{ secrets.REVIEW_TOKEN }}
+          number: ${{ steps.cpr.outputs.pull-request-number }}

@@ -1,0 +1,241 @@
+$row-h-th: 40px;
+$row-h-md: 56px;
+$row-h-category: 24px;
+$row-h: var(--x-table-row-height, #{$row-h-md});
+
+@property --x-table-td-bg-color {
+  syntax: '<color>';
+  inherits: true;
+  initial-value: transparent;
+}
+
+.x-table-wrap {
+  width: 100%;
+  min-height: 0;
+  height: 100%;
+  overflow: hidden;
+}
+
+.x-table {
+  --x-table-row-height: #{$row-h-md};
+  --x-table-border: solid 1px var(--xv-text--dividing-line);
+  --x-table-bg-color: var(--xv-container--surface);
+
+  display: grid;
+  grid-template-areas: var(--x-table-grid-area);
+  grid-template-columns: repeat(var(--x-table-columns-number), auto);
+  overflow: auto;
+  width: 100%;
+  min-height: 0;
+  max-height: 100%;
+  background-color: var(--x-table-bg-color);
+  scroll-behavior: smooth;
+}
+
+.x-table-row {
+  display: contents;
+
+  &--category {
+    --x-table-row-height: #{$row-h-category};
+    --x-table-td-bg-color: rgba(38, 38, 38, 0.06);
+  }
+
+  &--interactive {
+    &:active:not(:has(:active)) {
+      --x-table-td-bg-color: var(--xv-container--surface-pressed);
+    }
+  }
+
+  &--selected {
+    --x-table-td-bg-color: var(--xv-container--surface-active);
+
+    &:hover {
+      --x-table-td-bg-color: var(--xv-container--surface-active);
+    }
+
+    &:active {
+      --x-table-td-bg-color: var(--xv-container--surface-active);
+    }
+  }
+
+  &--highlight-animation {
+    @keyframes highlight {
+      0%,
+      25% {
+        background-color: var(--xv-primary--100);
+      }
+    }
+
+    & .x-table-td {
+      animation: highlight 1.5s 0.2s linear;
+    }
+  }
+
+  &:last-child {
+    --x-table-border: none;
+  }
+}
+
+.x-table-head,
+.x-table-body {
+  display: contents;
+  font-size: var(--xv-body--body-md--font-size);
+  font-weight: var(--xv-body--body-md--font-weight);
+  line-height: var(--xv-body--body-md--line-height);
+}
+
+.x-table-head {
+  grid-area: header;
+}
+.x-table-body {
+  grid-area: body;
+}
+
+.x-table-top-shadow {
+  top: calc(var(--x-table-top-shadow-top-position) * 1px);
+  position: sticky;
+  height: 0px;
+  grid-area: shadow;
+  clip-path: inset(-1px 0 -15px 0);
+  box-shadow: 0px -2px calc(var(--x-table-top-shadow, 1) * 12px) calc(
+      var(--x-table-top-shadow, 1) * 4px
+    ) rgba(38, 38, 38, 0.12);
+  pointer-events: none;
+  z-index: 5;
+}
+
+.x-table-bottom-shadow {
+  position: sticky;
+  transform: translateY(calc((var(--x-table-bottom-shadow, 50) - 1) * -1px));
+  width: 100%;
+  height: calc(var(--x-table-bottom-shadow, 50) * 1px);
+  pointer-events: none;
+  z-index: 5;
+  padding-bottom: 10px;
+
+  &::after {
+    content: '';
+    display: inline-block;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+      to top,
+      var(--xv-container--surface),
+      rgba(255, 255, 255, 0)
+    );
+  }
+}
+
+.x-table-th {
+  min-height: $row-h-th;
+  display: flex;
+  position: sticky;
+  top: 0;
+  padding: 0 1rem;
+  align-items: center;
+  --x-table-th-bg-color: var(--x-table-bg-color);
+  background-color: var(--x-table-th-bg-color);
+  border-bottom: var(--x-table-border, none);
+  font-weight: normal;
+  color: var(--xv-text--medium-emphasis-text);
+  white-space: nowrap;
+
+  // this should be global root variable instead
+  // prevent additional rendering layer in td showing in front of header
+  z-index: var(--x-table-th-z-index);
+
+  &:first-child {
+    padding-left: 0.5rem;
+  }
+  &:last-child {
+    padding-right: 0.5rem;
+  }
+
+  &--question {
+    margin-left: 0.5ch;
+  }
+
+  &--sortable {
+    cursor: pointer;
+
+    &:hover {
+      filter: brightness(98%);
+    }
+
+    &:active {
+      filter: brightness(95%);
+    }
+  }
+}
+
+.x-table-td {
+  min-height: $row-h;
+  display: flex;
+  padding: 0 1rem;
+  background-clip: padding-box;
+  border-bottom: var(--x-table-border, none);
+  align-items: var(--x-table-cell-vertical-align, center);
+  justify-content: var(--x-table-cell-align, center);
+  background-color: var(--x-table-td-bg-color, transparent);
+
+  &:first-child {
+    padding-left: 0.5rem;
+  }
+  &:last-child {
+    padding-right: 0.5rem;
+  }
+}
+
+.x-table-toggle-btn {
+  margin-right: 0.5rem;
+}
+
+.x-table-buffer {
+  &--start {
+    grid-area: buffer-start;
+    height: var(--x-table-buffer-start, 0);
+    background-image: url(./loading-row.svg);
+    background-size: 100% var(--x-table-buffer-skeleton-height, 0);
+    background-repeat: repeat-y;
+  }
+ 
+  &--end {
+    grid-column: span var(--x-table-buffer-end-grid-column, 0);
+    height: var(--x-table-buffer-end, 0);
+    background-image: url(./loading-row.svg);
+    background-size: 100% var(--x-table-buffer-skeleton-height, 0);
+    background-repeat: repeat-y;
+  }
+}
+
+.has-border {
+  .x-table {
+    --x-table-border: none;
+  }
+
+  .x-table-td {
+    border-top: solid 1px var(--xv-text--dividing-line);
+    border-left: solid 1px var(--xv-text--dividing-line);
+    border-bottom: none;
+  }
+
+  .x-table-row:last-child {
+    .x-table-td {
+      border-bottom: solid 1px var(--xv-text--dividing-line);
+    }
+  }
+
+  .x-table-td:last-child {
+    border-right: solid 1px var(--xv-text--dividing-line);
+  }
+
+  .x-table-th {
+    border-top: solid 1px var(--xv-text--dividing-line);
+    border-left: solid 1px var(--xv-text--dividing-line);
+    border-bottom: none;
+  }
+
+  .x-table-th:last-child {
+    border-right: solid 1px var(--xv-text--dividing-line);
+  }
+}

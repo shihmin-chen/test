@@ -1,0 +1,22 @@
+/**
+ * file generated from figma-plugin-extractor.
+ * [Format Style]: Prettier
+ * https://github.com/hikariNTU/figma-plugin-extractor
+ */
+:root[theme='green'] {
+  --xv-container--background--rgb: 204, 219, 200;
+  --xv-container--background: rgb(
+    var(--xv-container--background--rgb),
+    var(--xv-container--background--a, 1)
+  );
+  --xv-container--tinted-surface--rgb: 239, 242, 234;
+  --xv-container--tinted-surface: rgb(
+    var(--xv-container--tinted-surface--rgb),
+    var(--xv-container--tinted-surface--a, 1)
+  );
+  --xv-container--surface--rgb: 239, 242, 234;
+  --xv-container--surface: rgb(
+    var(--xv-container--surface--rgb),
+    var(--xv-container--surface--a, 1)
+  );
+}

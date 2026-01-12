@@ -1,0 +1,52 @@
+{
+  "include": [
+    "demo/",
+    "src/components",
+    "src/composable",
+    "src/",
+    "src/shared",
+    "src/components/dev",
+    // "src/demo",
+    "index.ts",
+    "./env.d.ts",
+    "./scripts/*.ts"
+  ],
+  "files": ["env.d.ts"],
+  "exclude": [
+    "node_modules/**/*",
+    "**/node_modules/**/*",
+    "**/*.spec.ts",
+    "**/**/*.md",
+    "**/demo.vue",
+    "**/demo/**/*",
+    "dist/**/*"
+  ],
+  "typeAcquisition": {
+    "enable": true
+  },
+  "compilerOptions": {
+    "declaration": true,
+    "declarationMap": false,
+    "outDir": "dist",
+    "declarationDir": "dist",
+    "isolatedModules": true,
+    "target": "esnext",
+    "module": "esnext",
+    "moduleResolution": "node",
+    "strict": true,
+    "jsx": "preserve",
+    "sourceMap": true,
+    "resolveJsonModule": true,
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
+    "lib": ["esnext", "dom"],
+    "paths": {
+      "@/*": ["./src/*"],
+      "@xui-assets/*": ["./public/assets/*"]
+    },
+    "types": ["vite/client"],
+    "baseUrl": ".",
+    "skipLibCheck": true,
+    "newLine": "lf"
+  }
+}

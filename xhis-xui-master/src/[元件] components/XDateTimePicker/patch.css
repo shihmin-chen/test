@@ -1,0 +1,33 @@
+:root {
+  --dp-font-family: 'EUDC CC', Inter, 'PingFang TC', 'Noto Sans TC',
+    'Microsoft JhengHei UI', 'Microsoft JhengHei', sans-serif;
+  --dp-border-radius: 12px;
+  --dp-input-padding: 0px 30px 0px 8px;
+  --dp-input-icon-padding: 40px;
+  --dp-action-row-padding: 8px 8px 16px;
+}
+.dp__theme_light {
+  --dp-background-color: var(--xv-container--surface);
+  --dp-text-color: var(--xv-text--high-emphasis-text);
+  --dp-hover-color: var(--xv-container--surface-hovered);
+  --dp-hover-text-color: var(--xv-text--high-emphasis-text);
+  --dp-hover-icon-color: var(--xv-text--high-emphasis-text);
+  --dp-primary-color: var(--xv-status--primary);
+  --dp-primary-disabled-color: var(--xv-container--surface-active);
+  --dp-primary-text-color: var(--xv-text--on-background-text);
+  --dp-secondary-color: var(--xv-text--disabled-text);
+  --dp-border-color: var(--xv-text--dividing-line);
+  --dp-menu-border-color: var(--xv-container--surface);
+  --dp-border-color-hover: var(--xv-text--placeholder-text);
+  --dp-disabled-color: var(--xv-container--disabled-background);
+  --dp-scroll-bar-background: var(--xv-container--surface);
+  --dp-scroll-bar-color: var(--xv-text--dividing-line);
+  --dp-success-color: var(--xv-status--success);
+  --dp-success-color-disabled: var(--xv-green--100);
+  --dp-icon-color: var(--xv-text--medium-emphasis-text);
+  --dp-danger-color: var(--xv-status--error);
+  --dp-marker-color: var(--xv-status--error);
+  --dp-tooltip-color: var(--xv-text--high-emphasis-text);
+  --dp-disabled-color-text: var(--xv-text--disabled-text);
+  --dp-highlight-color: var(--xv-container--surface-active);
+}

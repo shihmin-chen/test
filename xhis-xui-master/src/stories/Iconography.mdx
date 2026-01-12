@@ -1,0 +1,22 @@
+import { Meta, IconGallery, IconItem, Story } from '@storybook/blocks';
+import _ from 'lodash';
+
+import * as XIconStories from './XIcon.stories';
+
+<Meta of={XIconStories} />
+
+# Iconography
+
+<IconGallery>
+  {
+    Object.entries(import.meta.glob('../components/XIcon/icon-component/*.svg', { eager: true })).map(([key, value]) => {
+      const name = key.replace('../components/XIcon/icon-component/', '').replace('.svg', '');
+      const pascalCaseIcon = _.upperFirst(_.camelCase(name));
+      return(
+        <IconItem name={name}>
+          <Story of={XIconStories[pascalCaseIcon]} />
+        </IconItem>
+      )
+    })
+  }
+</IconGallery>

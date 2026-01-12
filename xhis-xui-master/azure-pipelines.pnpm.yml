@@ -1,0 +1,61 @@
+name: $(SourceBranchName)_$(Date:yyyyMMdd)$(Rev:.r)
+
+variables:
+- group: VERSION-GROUP
+- name: isMaster
+  value: $[in(variables['Build.SourceBranchName'], 'master', variables['releaseVersion'], variables['hotfixVersion'])]
+
+parameters:
+  - name: forceBuild
+    default: false
+    type: boolean
+
+trigger:
+  - master
+  - release/*
+  - hotfix/*
+
+pool:
+  vmImage: 'ubuntu-24.04'
+
+steps:
+  - task: NodeTool@0
+    displayName: 'Install Node.js'
+    inputs:
+      versionSpec: '20.16.0'
+
+  - script: |
+      npm install -g npm@10.8.1
+    displayName: 'Install specific npm version'
+
+  - task: Npm@1
+    inputs:
+      command: 'install'
+      customEndpoint: 'npm-aics-reg'
+
+  - task: CmdLine@2
+    displayName: 'run build'
+    inputs:
+      script: 'NODE_OPTIONS=--max-old-space-size=4096 npm run build'
+
+  - task: CmdLine@2
+    displayName: 'run unit test and generate report'
+    inputs:
+      script: 'NODE_OPTIONS=--max-old-space-size=4096 npm run test:ci'
+
+  - task: SonarCloudPrepare@1
+    inputs:
+      SonarCloud: 'SonarCloud'
+      organization: 'asus-aics'
+      scannerMode: 'CLI'
+      configMode: 'file'
+      extraProperties:
+
+  - task: SonarCloudAnalyze@1
+
+  - task: PublishBuildArtifacts@1
+    condition: and(succeeded(), or(eq('${{ parameters.forceBuild }}', true), eq(variables.isMaster, true)))
+    inputs:
+      PathtoPublish: '$(Build.ArtifactStagingDirectory)'
+      ArtifactName: 'drop'
+      publishLocation: 'Container'

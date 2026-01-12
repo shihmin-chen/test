@@ -1,0 +1,7 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`XCUInit renders correctly 1`] = `
+"<div>XCU setup fail</div>
+<!--teleport start-->
+<!--teleport end-->"
+`;

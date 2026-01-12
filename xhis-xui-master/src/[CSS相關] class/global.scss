@@ -1,0 +1,23 @@
+@import './normalize.css';
+@import './fonts.css';
+@import './brightness.css';
+@import './_figma/base-light.css';
+@import './_figma/grey.css';
+@import './_figma/green.css';
+@import './_figma/yellow.css';
+@import './_figma/font.css';
+@import './_figma/effect.css';
+@import './tippy-theme';
+
+:root {
+  // z-index
+  --x-table-th-z-index: 1;
+  --x-select-menu-z-index: 100;
+  --x-dropdown-menu-z-index: 100;
+}
+
+body {
+  font-family: 'EUDC CC', 'Inter', 'PingFang TC', 'Noto Sans TC',
+    'Microsoft JhengHei UI', 'Microsoft JhengHei', sans-serif;
+  color: var(--xv-text--high-emphasis-text);
+}

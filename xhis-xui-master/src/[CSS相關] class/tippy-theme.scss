@@ -1,0 +1,43 @@
+.tippy-box[data-theme~="xui"]{
+  border-radius: 4px;
+  overflow-wrap: break-word;
+  font-size: var(--xv-body--body-md--font-size);
+  font-weight: var(--xv-body--body-md--font-weight);
+  line-height: var(--xv-body--body-md--line-height);
+  background-color: var(--xv-text--high-emphasis-text);
+  >.tippy-content{
+    white-space: pre-wrap;
+    padding: 4px 12px;
+  }
+  .tippy-svg-arrow {
+    fill: var(--xv-text--high-emphasis-text);
+  }
+}
+
+.tippy-box[data-theme~="blue-card"] {
+  white-space: pre-wrap;
+  overflow-wrap: break-word;
+  font-size: var(--xv-body--body-sm--font-size);
+  font-weight: var(--xv-body--body-sm--font-weight);
+  line-height: var(--xv-body--body-sm--line-height);
+  border-radius: 8px;
+  background-color: var(--xv-teal--50);
+  color: var(--xv-text--high-emphasis-text);
+  border: solid 1px var(--xv-teal--100);
+  box-shadow: 0 4px 8px 2px #0000000a, 0 2px 6px 0 #0000000f, 0 0 4px 0 #00000014;
+  >.tippy-content{
+    padding: 12px 16px;
+  }
+}
+
+.tippy-box[data-theme~='dropdown'] {
+  font-size: 1rem;
+  overflow-wrap: break-word;
+  background-color: var(--xv-container--surface);
+  color: var(--xv-text--high-emphasis-text);
+  box-shadow: var(--xv-shadow-m);
+  border-radius: 8px;
+  .tippy-content {
+    padding: 0;
+  }
+}

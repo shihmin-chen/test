@@ -1,0 +1,39 @@
+/* inter-500 - latin */
+@font-face {
+  font-family: "Inter";
+  font-weight: 500;
+  font-display: swap;
+  src: url("@xui-assets/fonts/Inter/Inter-Medium.woff2") format("woff2");
+}
+/* inter-600 - latin */
+@font-face {
+  font-family: "Inter";
+  font-weight: 600;
+  font-display: swap;
+  src: url("@xui-assets/fonts/Inter/Inter-SemiBold.woff2") format("woff2");
+}
+
+/* Noto Sans TC-500 */
+@font-face {
+  font-family: "Noto Sans TC";
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+  src: url("@xui-assets/fonts/NotoSansTC/NotoSansTC-Medium.woff2") format("woff2");
+}
+
+/* Noto Sans TC-700 */
+@font-face {
+  font-family: "Noto Sans TC";
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+  src: url("@xui-assets/fonts/NotoSansTC/NotoSansTC-Bold.woff2") format("woff2");
+}
+
+/* eudc */
+@font-face {
+  font-family: "EUDC CC";
+  src: url("@xui-assets/fonts/EUDC/CC.woff2") format("woff2");
+  unicode-range: U+E000-F8FF;
+}

@@ -1,0 +1,53 @@
+# to detect which packages need to be published
+name: PublishPkgs
+
+on:
+  push:
+    paths:
+      ## only triggered by package json change in each package
+      - "package.json"
+      - "package-lock.json"
+    branches:
+      - master
+      - production
+      - release/*
+      - hotfix/*
+
+concurrency:
+  group: ci-${{ github.ref }}
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    env:
+      TEST: ${{ toJson(github.event) }}
+    steps:
+      - name: For testing, to be deleted
+        run: echo $TEST
+  iterate:
+    name: iterate through the package folder
+    runs-on: ubuntu-latest
+    env:
+      packagesRootPath: packages
+    outputs:
+      toUpdatePaths: ${{ steps.package_paths.outputs.toUpdatePaths }}
+    steps:
+      - name: Checkout the latest code in target branch
+        uses: actions/checkout@v3
+        with:
+          ref: ${{ github.ref }}
+      - name: get all of the package paths need to be updated
+        id: package_paths
+        run: |
+          a="${GITHUB_WORKSPACE}/${packagesRootPath}"
+          echo "packages path: $a"
+          chmod +x "${GITHUB_WORKSPACE}/.github/scripts/get-packages-path.sh"
+          echo "::set-output name=toUpdatePaths::$(${GITHUB_WORKSPACE}/.github/scripts/get-packages-path.sh $a)"
+      - name: Show toUpdatePaths
+        run: echo "toUpdatePaths=${{ steps.package_paths.outputs.toUpdatePaths}}"
+  check:
+    needs: iterate
+    uses: ./.github/workflows/PublishPkgTemplate.yml
+    with:
+      package_infos: ${{ needs.iterate.outputs.toUpdatePaths }}
+    secrets: inherit

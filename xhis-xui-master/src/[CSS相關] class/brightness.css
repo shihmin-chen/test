@@ -1,0 +1,19 @@
+:root[brightness='0'] {
+  filter: brightness(67%) contrast(150%);
+}
+
+:root[brightness='1'] {
+  filter: brightness(75%) contrast(134%);
+}
+
+:root[brightness='2'] {
+  filter: brightness(85%) contrast(118%);
+}
+
+:root[brightness='3'] {
+  filter: brightness(100%) contrast(100%);
+}
+
+:root[brightness='4'] {
+  filter: brightness(105%) contrast(100%);
+}

@@ -1,0 +1,53 @@
+@mixin keyframes($name) {
+  @-webkit-keyframes #{$name} {
+    @content;
+  }
+  @-moz-keyframes #{$name} {
+    @content;
+  }
+  @-ms-keyframes #{$name} {
+    @content;
+  }
+  @keyframes #{$name} {
+    @content;
+  }
+}
+@mixin animation-class($name) {
+  @include keyframes(#{$name}) {
+    @content;
+  }
+  .#{$name}-enter-active {
+    animation: #{$name} calc(var(--x-notification-animation-speed) * 1ms);
+  }
+
+  .#{$name}-leave-to {
+    animation: #{$name} reverse calc(var(--x-notification-animation-speed) * 1ms);
+  }
+}
+
+@include animation-class(left) {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(0);
+  }
+}
+
+@include animation-class(right) {
+  0% {
+    transform: translateX(100%);
+  }
+  100% {
+    transform: translateX(0);
+  }
+}
+
+@include animation-class(center) {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    transform: 1;
+  }
+}

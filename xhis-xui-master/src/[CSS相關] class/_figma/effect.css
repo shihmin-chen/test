@@ -1,0 +1,32 @@
+:root {
+  --xv-shadow-s: 0px 2px 8px 2px rgba(38, 38, 38, 0.12);
+  --xv-shadow-m: 0px 4px 12px 2px rgba(38, 38, 38, 0.16);
+  --xv-shadow-l: 0px 6px 16px 2px rgba(38, 38, 38, 0.2);
+  --xv-shadow-xl: 0px 8px 24px 2px rgba(38, 38, 38, 0.24);
+}
+
+.x-shadow,
+.x-shadow--m {
+  box-shadow: var(--xv-shadow-m);
+}
+
+.x-shadow--s {
+  box-shadow: var(--xv-shadow-s);
+}
+
+.x-shadow--l {
+  box-shadow: var(--xv-shadow-l);
+}
+
+.x-shadow--xl {
+  box-shadow: var(--xv-shadow-xl);
+}
+
+.x-shadow--tooltip {
+  box-shadow: 0 0 4px rgba(0, 0, 0, 0.08), 0 2px 6px rgba(0, 0, 0, 0.06),
+    0 4px 8px 2px rgba(0, 0, 0, 0.04);
+}
+
+.x-shadow--dialog {
+  box-shadow: 0 4px 10px rgba(117, 117, 117, 0.5);
+}

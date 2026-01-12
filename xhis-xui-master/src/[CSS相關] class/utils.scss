@@ -1,0 +1,188 @@
+.x-flex {
+  display: flex;
+}
+.x-flex-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.x-ellipsis {
+  display: -webkit-box;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+
+  &--1 {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  @for $i from 2 through 5 {
+    &--#{$i} {
+      @extend .x-ellipsis;
+      -webkit-line-clamp: $i;
+    }
+  }
+
+  &--inline {
+    display: -webkit-inline-box;
+  }
+}
+
+.x-scroll-bar {
+  $size: 12px;
+  $gap: 3px;
+
+  $size-lg: 16px;
+  $gap-lg: 4px;
+
+  &::-webkit-scrollbar {
+    width: $size;
+    height: $size;
+  }
+  &::-webkit-scrollbar-button {
+    display: none;
+  }
+  /* Track */
+  &::-webkit-scrollbar-track {
+    background-color: #9990;
+    border-radius: 30px;
+    &:hover {
+      background-color: #9992;
+    }
+  }
+  /* Handle */
+  &::-webkit-scrollbar-thumb {
+    border-radius: 20px;
+    border: $gap solid transparent;
+    background-color: #9996;
+    background-clip: content-box;
+    &:hover {
+      background-color: #999c;
+    }
+  }
+  /* Corner */
+  &::-webkit-scrollbar-corner {
+    background-color: transparent;
+  }
+
+  &-lg {
+    &::-webkit-scrollbar {
+      width: $size-lg;
+      height: $size-lg;
+    }
+    &::-webkit-scrollbar-thumb {
+      border-width: $gap-lg;
+    }
+  }
+}
+
+.x-aria-tooltip {
+  --x-atp-tip-l: 10px;
+  --x-atp-bg: var(--xv-text--high-emphasis-text);
+  --x-atp-color: white;
+  --x-atp-p: 4px 12px;
+  --x-atp-bs: 0px 4px 8px 2px #0001;
+  --x-atp-w: max-content;
+  --x-atp-z-index: 50000; // should be the same as `DefaultZIndex.Tooltip` in `packages/xui/src/composable/useDynamicZIndex.ts:14`
+
+  position: relative;
+  overflow: visible;
+
+  $arrow-offset: 1px;
+
+  &:not(:disabled) {
+    &:hover,
+    &:focus-visible {
+      &::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 50%;
+        width: var(--x-atp-tip-l);
+        height: var(--x-atp-tip-l);
+        border-bottom-right-radius: 3px;
+        background-color: var(--x-atp-bg);
+        transform: translate(-50%, calc(-100% - $arrow-offset)) rotate(45deg);
+        z-index: var(--x-atp-z-index);
+      }
+      &::after {
+        content: attr(aria-label);
+        position: absolute;
+        top: 0;
+        left: 50%;
+        width: var(--x-atp-w);
+        padding: var(--x-atp-p);
+        background-color: var(--x-atp-bg);
+        color: var(--x-atp-color);
+        border-radius: 4px;
+        box-shadow: var(--x-atp-bs);
+        transform: translate(-50%, calc(-100% - 6px));
+        z-index: var(--x-atp-z-index);
+        line-height: 24px;
+      }
+    }
+
+    &:focus-visible {
+      box-shadow: 0 0 1px 2px #0074e666;
+      outline: none;
+    }
+  }
+
+  &--bottom {
+    &:not(:disabled) {
+      &:hover,
+      &:focus-visible {
+        &::before {
+          top: unset;
+          bottom: 0;
+          left: 50%;
+          border-top-left-radius: 3px;
+          transform: translate(-50%, calc(100% + $arrow-offset)) rotate(45deg);
+        }
+        &::after {
+          top: unset;
+          bottom: 0;
+          transform: translate(-50%, calc(100% + 6px));
+        }
+      }
+    }
+  }
+  &--right {
+    &:not(:disabled) {
+      &:hover,
+      &:focus-visible {
+        &::before {
+          top: 50%;
+          left: unset;
+          right: 0;
+          border-bottom-left-radius: 3px;
+          border-bottom-right-radius: 0px;
+          transform: translate(calc(100% + $arrow-offset), -50%) rotate(45deg);
+        }
+        &::after {
+          top: 50%;
+          left: unset;
+          right: 0;
+          transform: translate(calc(100% + 6px), -50%);
+        }
+      }
+    }
+  }
+}
+
+.x-loading-dots::after {
+  display: inline-block;
+  animation: dotty steps(1, end) 1s infinite;
+  content: '';
+}
+@keyframes dotty {
+  0%   { content: '' ;  }
+  25%  { content: '.';  }
+  50%  { content: '..'; }
+  75%  { content: '...';}
+  100% { content: '';   }
+}

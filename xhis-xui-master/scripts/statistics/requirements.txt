@@ -1,0 +1,2 @@
+beautifulsoup4==4.10.0
+esprima==4.0.1
