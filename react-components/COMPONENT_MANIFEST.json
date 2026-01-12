@@ -1,0 +1,182 @@
+{
+  "version": "1.4.0",
+  "updated": "2026-01-12",
+  "description": "React UI Component Library - Converted from Vue XUI",
+  "repository": "https://github.com/shihmin-chen/test",
+  "components": {
+    "completed": [
+      {
+        "name": "Button",
+        "files": ["Button.tsx", "Button.css"],
+        "category": "form",
+        "props": ["display", "theme", "size", "outline", "loading", "disabled"],
+        "description": "按鈕組件，支援多種主題和尺寸"
+      },
+      {
+        "name": "Input",
+        "files": ["Input.tsx", "Input.css"],
+        "category": "form",
+        "props": ["label", "type", "size", "error", "fill", "required"],
+        "description": "輸入框組件，支援密碼和搜尋類型"
+      },
+      {
+        "name": "Select",
+        "files": ["Select.tsx", "Select.css"],
+        "category": "form",
+        "props": ["value", "onChange", "options", "theme", "size"],
+        "description": "下拉選單組件"
+      },
+      {
+        "name": "Checkbox",
+        "files": ["Checkbox.tsx", "Checkbox.css"],
+        "category": "form",
+        "props": ["label", "checked", "onChange", "disabled"],
+        "description": "核取方塊組件"
+      },
+      {
+        "name": "Radio",
+        "files": ["Radio.tsx", "Radio.css"],
+        "category": "form",
+        "props": ["value", "label", "checked", "onChange", "disabled"],
+        "description": "單選按鈕組件（需配合 RadioGroup 使用）"
+      },
+      {
+        "name": "RadioGroup",
+        "files": ["Radio.tsx", "Radio.css"],
+        "category": "form",
+        "props": ["name", "value", "onChange", "children"],
+        "description": "單選按鈕群組"
+      },
+      {
+        "name": "TextArea",
+        "files": ["TextArea.tsx", "TextArea.css"],
+        "category": "form",
+        "props": ["value", "onChange", "placeholder", "rows", "disabled"],
+        "description": "多行文字輸入組件"
+      },
+      {
+        "name": "Card",
+        "files": ["Card.tsx", "Card.css"],
+        "category": "layout",
+        "subComponents": ["CardHeader", "CardBody", "CardFooter", "CardIcon"],
+        "props": ["children", "className"],
+        "description": "卡片容器組件，支援 header/body/footer/icon 結構"
+      },
+      {
+        "name": "Modal",
+        "files": ["Modal.tsx", "Modal.css"],
+        "category": "layout",
+        "subComponents": ["ModalHeader", "ModalBody", "ModalFooter"],
+        "props": ["open", "onClose", "backdrop", "closeOnBackdrop", "closeOnEsc", "width", "maxWidth", "height", "maxHeight"],
+        "description": "彈出視窗組件，支援 ESC 關閉和背景遮罩"
+      },
+      {
+        "name": "Divider",
+        "files": ["Divider.tsx", "Divider.css"],
+        "category": "layout",
+        "props": ["variant", "size", "as", "className"],
+        "description": "分隔線組件"
+      },
+      {
+        "name": "Label",
+        "files": ["Label.tsx", "Label.css"],
+        "category": "form",
+        "props": ["children", "htmlFor", "required", "requiredIndicator", "className"],
+        "description": "表單標籤組件，支援必填標記"
+      }
+    ],
+    "pending": [
+      "DatePicker",
+      "TimePicker",
+      "DateTimePicker",
+      "Switch",
+      "Slider",
+      "Progress",
+      "Badge",
+      "Avatar",
+      "Tooltip",
+      "Popover",
+      "Dropdown",
+      "Menu",
+      "Tabs",
+      "Accordion",
+      "Alert",
+      "Toast",
+      "Dialog",
+      "Drawer",
+      "Table",
+      "Pagination",
+      "Breadcrumb",
+      "Steps",
+      "Tree"
+    ]
+  },
+  "coreFiles": [
+    {
+      "file": "index.tsx",
+      "purpose": "Main entry point - exports all components and auto-loads CSS",
+      "required": true
+    },
+    {
+      "file": "all.css",
+      "purpose": "Combines all component styles",
+      "required": true
+    },
+    {
+      "file": "theme.css",
+      "purpose": "Design system CSS variables",
+      "required": true
+    }
+  ],
+  "installation": {
+    "method": "github",
+    "steps": [
+      "Read COMPONENT_MANIFEST.json to discover components",
+      "Copy all files from react-components/ to /src/components/react-components/",
+      "Comment out @import './theme.css'; in /src/styles/index.css",
+      "Import components: import { Button, Card } from './components/react-components'"
+    ]
+  },
+  "designSystem": {
+    "colors": {
+      "background": "#F5F5F5",
+      "card": "#F2F2F2",
+      "primary": "#0067CC",
+      "destructive": "#BF2E3A"
+    },
+    "spacing": {
+      "unit": "8px",
+      "scale": [0, 8, 16, 24, 32, 40, 48]
+    },
+    "borderRadius": {
+      "button": "8px",
+      "card": "8px"
+    },
+    "typography": {
+      "fontFamily": "Inter, sans-serif",
+      "sizes": [12, 14, 16, 18, 20, 24, 28, 32, 36]
+    }
+  },
+  "documentation": [
+    {
+      "file": "README.md",
+      "description": "Complete usage guide with examples"
+    },
+    {
+      "file": "STYLING_GUIDELINES.md",
+      "description": "When to use Input fill, Select theme, etc."
+    },
+    {
+      "file": "THEME_CONFLICT_FIX.md",
+      "description": "How to resolve theme.css conflicts"
+    },
+    {
+      "file": "AI_SETUP_GUIDE.md",
+      "description": "Step-by-step guide for AI assistants"
+    },
+    {
+      "file": "CHANGELOG.md",
+      "description": "Version history and updates"
+    }
+  ]
+}
