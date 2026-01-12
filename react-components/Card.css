@@ -9,11 +9,9 @@
   width: 100%;
   height: 100%;
   min-height: 0;
-  /* IMPORTANT: Always use opaque background to prevent transparency */
-  background-color: var(--card) !important;
+  background-color: var(--card);
   border-radius: var(--radius-card);
   box-shadow: var(--elevation-sm);
-  /* Ensure card is on top of page background */
   position: relative;
   z-index: 1;
 }
@@ -48,7 +46,6 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  /* Ensure busy cover is fully opaque */
   background-color: var(--card);
   visibility: hidden;
   pointer-events: none;
