@@ -109,6 +109,8 @@ className="bg-[rgba(255,255,255,0)]"
 className="bg-card"
 ```
 
+詳細請參考 **TROUBLESHOOTING.md**
+
 ---
 
 ## 🎨 使用指南
@@ -184,34 +186,24 @@ const [isOpen, setIsOpen] = useState(false);
 
 ---
 
-## 🐛 常見問題
+## 🐛 遇到問題？
 
-### 問題 1：背景是白色或綠色
-
-**原因：** 沒有註解 `/src/styles/index.css` 中的 `@import './theme.css';`
-
-**解決：** 註解該行並重新啟動開發伺服器。
-
-### 問題 2：Card 或 Modal 透明
-
-**原因：** Figma 導入代碼包含 `bg-[rgba(255,255,255,0)]`
-
-**解決：** 移除所有透明背景 className，改用 `bg-card`。
-
-### 問題 3：組件沒有樣式
-
-**原因：** CSS 沒有載入
-
-**解決：** 確認從 `'./components/react-components'` 導入（不是單獨導入 `.tsx` 檔）。
+詳細問題排查請參考 **TROUBLESHOOTING.md**
 
 ---
 
 ## 📚 相關文件
 
-- **README.md** - 完整使用說明
-- **STYLING_GUIDELINES.md** - 樣式使用指南
-- **THEME_CONFLICT_FIX.md** - Theme 衝突詳細解決指南
-- **COMPONENT_MANIFEST.json** - 組件清單
+### 核心文件（共 4 個）
+
+1. **README.md** - 完整使用說明和組件 API
+2. **AI_SETUP_GUIDE.md** (本文件) - AI 助理快速設置指南
+3. **STYLING_GUIDELINES.md** - 樣式使用指南和最佳實踐
+4. **TROUBLESHOOTING.md** - 常見問題快速排查
+
+### 其他文件
+
+- **COMPONENT_MANIFEST.json** - 組件清單和文件映射
 - **CHANGELOG.md** - 版本更新記錄
 
 ---
@@ -238,5 +230,5 @@ write: /src/styles/index.css
 
 ---
 
-**版本：** 1.4.0  
+**版本：** 2.0.0 (精簡版)  
 **更新時間：** 2026-01-12
