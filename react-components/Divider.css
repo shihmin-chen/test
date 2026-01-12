@@ -1,0 +1,39 @@
+.divider {
+  border-width: 0 0 1px 0;
+  border-style: solid;
+  border-color: var(--border);
+  margin: 0;
+}
+
+.divider--sm {
+  margin: 0 8px;
+}
+
+.divider--md {
+  margin: 0 16px;
+}
+
+.divider--lg {
+  margin: 0 32px;
+}
+
+.divider--vertical {
+  display: inline-block;
+  width: 0;
+  height: 100%;
+  border-width: 0 0 0 1px;
+  margin: 0;
+  vertical-align: middle;
+}
+
+.divider--vertical.divider--sm {
+  margin: 8px 0;
+}
+
+.divider--vertical.divider--md {
+  margin: 16px 0;
+}
+
+.divider--vertical.divider--lg {
+  margin: 32px 0;
+}
