@@ -22,7 +22,7 @@
   --font-weight-bold: 700;
   
   /* ⚠️ IMPORTANT: Page background color - DO NOT change to white or green */
-  --background: rgba(240, 3, 85, 1.00);  /* #D9D9DB Deep gray - Page background */
+  --background: rgba(217, 217, 219, 1.00);  /* #D9D9DB Deep gray - Page background */
   
   /* The default color for elements or text that appears on top of the background. */
   --foreground: rgba(26, 26, 26, 1.00);
