@@ -1,0 +1,95 @@
+.x-radio-group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.x-radio-button {
+  display: inline-flex;
+  position: relative;
+  align-items: center;
+  gap: 4px;
+  color: var(--foreground);
+  margin: 0;
+  font-family: 'Inter', sans-serif;
+  font-size: var(--text-base);
+  font-weight: var(--font-weight-medium);
+  line-height: 1.5;
+  cursor: pointer;
+  user-select: none;
+
+  --checked-fill: var(--primary);
+  --unchecked-fill: transparent;
+  --unchecked-stroke: var(--muted-foreground);
+}
+
+.x-radio-button-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: 28px;
+  width: 28px;
+}
+
+.x-radio-button-icon svg {
+  border-radius: 100rem;
+  transition: box-shadow 0.1s;
+}
+
+.x-radio-button--sm {
+  font-size: var(--text-sm);
+}
+
+.x-radio-button--sm .x-radio-button-icon {
+  height: 24px;
+  width: 24px;
+}
+
+.x-radio-button.x-radio-button--error {
+  --unchecked-stroke: var(--destructive);
+}
+
+.x-radio-button:hover:not(.x-radio-button--disabled) {
+  --checked-fill: var(--primary);
+  filter: brightness(1.1);
+}
+
+.x-radio-button:hover:not(.x-radio-button--disabled) .x-radio-button-icon svg[fill='var(--unchecked-fill)'] {
+  --unchecked-fill: var(--muted);
+}
+
+.x-radio-button:active:not(.x-radio-button--disabled) {
+  --checked-fill: var(--primary);
+  filter: brightness(0.9);
+}
+
+.x-radio-button:active:not(.x-radio-button--disabled) .x-radio-button-icon svg {
+  --unchecked-fill: var(--muted);
+  filter: brightness(0.95);
+}
+
+.x-radio-button.x-radio-button--disabled {
+  color: var(--muted-foreground);
+  cursor: not-allowed;
+  --checked-fill: var(--muted-foreground);
+  --unchecked-fill: var(--muted);
+  --unchecked-stroke: var(--muted-foreground);
+}
+
+.x-radio-button.x-radio-button--readonly {
+  pointer-events: none;
+}
+
+.x-radio-button-input {
+  position: absolute;
+  opacity: 0;
+  height: 100%;
+  width: 100%;
+  cursor: pointer;
+}
+
+.x-radio-button-input:focus-visible + .x-radio-button-icon svg {
+  box-shadow:
+    0 0 0px 2px var(--card),
+    0 0 0px 4px rgba(0, 0, 0, 0.3);
+}

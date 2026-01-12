@@ -1,0 +1,117 @@
+.x-checkbox {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  color: var(--foreground);
+  white-space: nowrap;
+  padding: 0 0 0 3px;
+  margin: 0;
+  font-family: 'Inter', sans-serif;
+  font-size: var(--text-base);
+  font-weight: var(--font-weight-medium);
+  line-height: 1.5;
+  cursor: pointer;
+}
+
+.x-checkbox--sm {
+  font-size: var(--text-sm);
+}
+
+.x-checkbox--disabled {
+  color: var(--muted-foreground);
+  cursor: not-allowed;
+}
+
+.x-checkbox--readonly {
+  pointer-events: none;
+}
+
+.x-checkbox-input {
+  appearance: none;
+  width: 18px;
+  height: 18px;
+  flex: 0 0 auto;
+  border: 2px solid var(--muted-foreground);
+  border-radius: 2px;
+  background-color: var(--card);
+  background-repeat: no-repeat;
+  background-position: center;
+  transition:
+    box-shadow 0.1s,
+    background-color 0.1s,
+    border-color 0.1s;
+  cursor: pointer;
+}
+
+.x-checkbox-input:indeterminate {
+  border-color: var(--primary);
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 18 18'%3E%3Crect x='4' y='8' width='10' height='2' fill='%230067CC'/%3E%3C/svg%3E");
+}
+
+.x-checkbox-input:checked {
+  border: none;
+  background-color: var(--primary);
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 18 18'%3E%3Cpath fill='white' d='M6.5 11.5L3.5 8.5L2 10L6.5 14.5L16 5L14.5 3.5L6.5 11.5Z'/%3E%3C/svg%3E");
+}
+
+.x-checkbox-input:enabled:hover {
+  background-color: var(--muted);
+}
+
+.x-checkbox-input:enabled:active {
+  background-color: var(--muted);
+  filter: brightness(0.95);
+}
+
+.x-checkbox-input:enabled:indeterminate:hover {
+  background-color: var(--primary);
+  filter: brightness(1.1);
+}
+
+.x-checkbox-input:enabled:indeterminate:active {
+  background-color: var(--primary);
+  filter: brightness(0.95);
+}
+
+.x-checkbox-input:enabled:checked {
+  background-color: var(--primary);
+}
+
+.x-checkbox-input:enabled:checked:hover {
+  background-color: var(--primary);
+  filter: brightness(1.1);
+}
+
+.x-checkbox-input:enabled:checked:active {
+  background-color: var(--primary);
+  filter: brightness(0.9);
+}
+
+.x-checkbox-input:enabled:focus-visible {
+  outline: none;
+  box-shadow:
+    0 0 0px 2px var(--card),
+    0 0 0px 4px rgba(0, 0, 0, 0.3);
+}
+
+.x-checkbox-input:disabled {
+  border-color: var(--muted-foreground);
+  background-color: var(--muted);
+  cursor: not-allowed;
+}
+
+.x-checkbox-input:disabled:indeterminate {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 18 18'%3E%3Crect x='4' y='8' width='10' height='2' fill='%23999'/%3E%3C/svg%3E");
+}
+
+.x-checkbox-input:disabled:checked {
+  background-color: var(--muted-foreground);
+}
+
+.x-checkbox-input--error {
+  border-color: var(--destructive);
+}
+
+.x-checkbox-input--hide {
+  visibility: hidden;
+}
