@@ -21,14 +21,14 @@
   --font-weight-semibold: 600;
   --font-weight-bold: 700;
   
-  /* The default background color for the application. */
-  --background: rgba(245, 245, 245, 1.00);
+  /* ⚠️ IMPORTANT: Page background color - DO NOT change to white or green */
+  --background: rgba(245, 245, 245, 1.00);  /* #F5F5F5 Deep gray - Page background */
   
   /* The default color for elements or text that appears on top of the background. */
   --foreground: rgba(26, 26, 26, 1.00);
   
   /* The background color for cards, modals, and other containers. */
-  --card: rgba(242, 242, 242, 1.00);
+  --card: rgba(242, 242, 242, 1.00);  /* #F2F2F2 Light gray - Card background */
   
   /* The default color for text or elements that appears on top of cards, modals and other background containers. */
   --card-foreground: rgba(26, 26, 26, 1.00);
