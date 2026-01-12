@@ -17,13 +17,16 @@
 
 .modal-content {
   position: relative;
-  background-color: var(--card);
+  /* IMPORTANT: Always use opaque background to prevent transparency */
+  background-color: var(--card) !important;
   border-radius: var(--radius-card);
   box-shadow: 0 0 8px 0 rgba(34, 34, 34, 0.27);
   display: flex;
   flex-direction: column;
   outline: none;
   animation: modal-fade-in 0.2s ease-out;
+  /* Ensure modal content is above backdrop */
+  z-index: 1001;
 }
 
 @keyframes modal-fade-in {
@@ -43,6 +46,8 @@
   justify-content: space-between;
   padding: 24px 32px;
   border-bottom: 1px solid var(--border);
+  /* Ensure header has background */
+  background-color: transparent;
 }
 
 .modal-title {
@@ -85,6 +90,8 @@
   font-weight: var(--font-weight-medium);
   line-height: 1.5;
   color: var(--foreground);
+  /* Ensure body has background */
+  background-color: transparent;
 }
 
 .modal-footer {
@@ -94,4 +101,6 @@
   gap: 12px;
   padding: 16px 32px 24px;
   border-top: 1px solid var(--border);
+  /* Ensure footer has background */
+  background-color: transparent;
 }
