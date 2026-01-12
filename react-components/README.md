@@ -4,6 +4,33 @@
 
 ---
 
+## ⚠️ 重要：Theme CSS 衝突解決（必讀！）
+
+**當複製這個元件庫到 Figma Make 專案時，會有兩個 theme.css 衝突！**
+
+### 🚨 必須執行的步驟
+
+**1. 停用 Figma Make 預設的 theme.css**
+
+編輯 `/src/styles/index.css`：
+
+```css
+@import './fonts.css';
+@import './tailwind.css';
+/* @import './theme.css'; */  /* ⬅️ 註解掉這行！ */
+```
+
+**2. 驗證修正成功**
+
+打開開發者工具，檢查 `<body>` 背景色：
+- ✅ 應該是 `rgb(245, 245, 245)` (深灰色)
+- ❌ 不是 `rgb(255, 255, 255)` (白色)
+- ❌ 不是 `rgb(204, 219, 200)` (綠色)
+
+📖 **詳細說明請參考：** [THEME_CONFLICT_FIX.md](./THEME_CONFLICT_FIX.md)
+
+---
+
 ## 🚀 快速開始（推薦方式）
 
 ### 步驟 1：從 GitHub 複製組件
@@ -13,13 +40,20 @@
 ```
 請從 GitHub repo https://github.com/shihmin-chen/test 
 的 react-components 資料夾讀取所有檔案並複製到這個專案的 src/components/react-components/
+
+然後修改 /src/styles/index.css，註解掉：
+@import './theme.css';
+
+因為我們要使用元件庫的 theme.css，避免衝突。
+
+然後參考 STYLING_GUIDELINES.md 來正確使用元件。
 ```
 
 ### 步驟 2：直接使用組件（CSS 會自動載入！）
 
 ```tsx
 // src/app/App.tsx
-import { Button, Input, Card, Modal, Label } from './components/react-components';
+import { Button, Input, Select, Card, Modal, Label } from './components/react-components';
 // ☝️ CSS 會自動載入，不需要額外 import！
 
 function App() {
@@ -29,7 +63,7 @@ function App() {
         <CardHeader>我的卡片</CardHeader>
         <CardBody>
           <Label htmlFor="name" required>姓名</Label>
-          <Input id="name" placeholder="輸入文字" />
+          <Input id="name" fill placeholder="請輸入" />
         </CardBody>
       </Card>
     </div>
@@ -625,6 +659,36 @@ function ProfileForm() {
 
 ---
 
+## 🚨 疑難排解
+
+### 問題：背景顏色是白色或綠色，不是灰色
+
+**原因：** 有兩個 theme.css 衝突
+
+**解決：** 
+1. 檢查 `/src/styles/index.css`
+2. 確認 `@import './theme.css';` 已被註解
+3. 重新啟動開發伺服器
+
+📖 **詳細說明：** [THEME_CONFLICT_FIX.md](./THEME_CONFLICT_FIX.md)
+
+### 問題：組件沒有樣式
+
+**檢查清單：**
+1. ✅ 是否從 `'./components/react-components'` 導入？（推薦）
+2. ✅ 或者是否手動導入了 `all.css`？
+3. ✅ 路徑是否正確？（根據你的資料夾結構調整）
+
+### 問題：Input/Select 顏色不對
+
+**檢查：**
+- 在 `bg-card` 上使用 `<Input fill />` 和 `<Select theme="white" />`
+- 在 `bg-background` 上使用 `<Input />` 和 `<Select />` (或 `theme="grey"`)
+
+📖 **詳細說明：** [STYLING_GUIDELINES.md](./STYLING_GUIDELINES.md)
+
+---
+
 ## 📋 完整組件列表
 
 ✅ **已完成 (10/33)**
@@ -666,6 +730,7 @@ react-components/
 ├── all.css                      ← 所有樣式集合
 ├── theme.css                    ← 設計系統變數
 ├── STYLING_GUIDELINES.md        ← 樣式使用指南
+├── THEME_CONFLICT_FIX.md        ← 衝突解決指南 🆕
 ├── README.md                    ← 本文件
 │
 ├── Button.tsx / .css
@@ -682,6 +747,19 @@ react-components/
 
 ---
 
+## 🎯 快速檢查清單
+
+使用組件前，確認：
+
+- [ ] 已從 GitHub 複製所有檔案到專案
+- [ ] 已註解 `/src/styles/index.css` 中的 `@import './theme.css';` ⚠️
+- [ ] 使用 `import { ... } from './components/react-components'` 導入
+- [ ] 頁面背景為深灰色 (#F5F5F5)
+- [ ] 組件有正確的顏色和樣式
+- [ ] Inter 字體已載入
+
+---
+
 **Repository:** https://github.com/shihmin-chen/test  
-**版本:** 1.2.0  
+**版本:** 1.3.0  
 **最後更新:** 2026-01-12
