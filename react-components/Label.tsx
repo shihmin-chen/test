@@ -2,28 +2,35 @@ import React, { ReactNode } from 'react';
 import './Label.css';
 
 export interface LabelProps {
-  children?: ReactNode;
-  htmlFor?: string;
+  /** Label text */
+  children: ReactNode;
+  /** Whether the field is required */
   required?: boolean;
+  /** HTML for attribute */
+  htmlFor?: string;
+  /** Custom className */
   className?: string;
-  size?: 'sm' | 'md' | 'lg';
+  /** Custom required indicator text (default: '*') */
+  requiredIndicator?: string;
 }
 
 export function Label({
   children,
-  htmlFor,
   required = false,
+  htmlFor,
   className = '',
-  size = 'md',
+  requiredIndicator = '*',
 }: LabelProps) {
   return (
-    <label
-      htmlFor={htmlFor}
-      className={`label label--${size} ${className}`}
-      data-qa-xui="Label"
-    >
+    <label htmlFor={htmlFor} className={`form-label ${className}`}>
       {children}
-      {required && <span className="label-required">*</span>}
+      {required && (
+        <span className="form-label-required" aria-label="required">
+          {requiredIndicator}
+        </span>
+      )}
     </label>
   );
 }
+
+export default Label;

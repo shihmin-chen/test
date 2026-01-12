@@ -1,15 +1,4 @@
-/**
- * React UI Components Library
- * 
- * Auto-imports all component styles when you import from this file.
- * 
- * Usage:
- *   import { Button, Input, Select } from './react-components';
- * 
- * The CSS will be automatically loaded!
- */
-
-// Import all styles first
+// Auto-import all component CSS files
 import './all.css';
 
 // Export all components
@@ -30,3 +19,15 @@ export type { RadioProps, RadioGroupProps } from './Radio';
 
 export { TextArea } from './TextArea';
 export type { TextAreaProps } from './TextArea';
+
+export { Card, CardHeader, CardBody, CardFooter, CardIcon } from './Card';
+export type { CardProps, CardHeaderProps, CardBodyProps, CardFooterProps, CardIconProps } from './Card';
+
+export { Modal, ModalHeader, ModalBody, ModalFooter } from './Modal';
+export type { ModalProps, ModalHeaderProps, ModalBodyProps, ModalFooterProps } from './Modal';
+
+export { Divider } from './Divider';
+export type { DividerProps, DividerVariant, DividerSize } from './Divider';
+
+export { Label } from './Label';
+export type { LabelProps } from './Label';

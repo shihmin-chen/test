@@ -1,93 +1,106 @@
-import React, { ReactNode, useEffect, useRef, CSSProperties } from 'react';
+import React, { ReactNode, useEffect, useRef, useState } from 'react';
 import { createPortal } from 'react-dom';
 import './Modal.css';
 
 export interface ModalProps {
-  children?: ReactNode;
+  /** Whether the modal is visible */
   open: boolean;
+  /** Callback when the modal should close */
   onClose?: () => void;
-  width?: number | string;
-  height?: number | string;
-  maxWidth?: number | string;
-  maxHeight?: number | string;
-  top?: string;
-  left?: string;
+  /** Modal content */
+  children?: ReactNode;
+  /** Whether to show backdrop (default: true) */
+  backdrop?: boolean;
+  /** Whether clicking backdrop closes modal (default: false) */
   closeOnBackdrop?: boolean;
-  showBackdrop?: boolean;
+  /** Whether pressing ESC closes modal (default: true) */
+  closeOnEsc?: boolean;
+  /** Modal width in pixels (default: 500) */
+  width?: number;
+  /** Modal max-width (default: 90vw) */
+  maxWidth?: string | number;
+  /** Modal height in pixels or 'auto' (default: 'auto') */
+  height?: number | 'auto';
+  /** Modal max-height (default: 90vh) */
+  maxHeight?: string | number;
+  /** Custom className for the modal */
   className?: string;
-  zIndex?: number;
+  /** Custom z-index offset (default: 0) */
+  zIndexShift?: number;
+  /** Test ID */
+  'data-testid'?: string;
 }
 
 export function Modal({
-  children,
   open,
   onClose,
-  width = 500,
-  height = 'auto',
-  maxWidth = 'none',
-  maxHeight = 'none',
-  top,
-  left,
+  children,
+  backdrop = true,
   closeOnBackdrop = false,
-  showBackdrop = true,
+  closeOnEsc = true,
+  width = 500,
+  maxWidth = '90vw',
+  height = 'auto',
+  maxHeight = '90vh',
   className = '',
-  zIndex = 1000,
+  zIndexShift = 0,
+  'data-testid': testId,
 }: ModalProps) {
   const modalRef = useRef<HTMLDivElement>(null);
-  const contentRef = useRef<HTMLDivElement>(null);
+  const [zIndex] = useState(1000 + zIndexShift);
 
   useEffect(() => {
-    if (open) {
-      // Focus modal when opened
-      modalRef.current?.focus();
+    if (!open) return;
 
-      // Handle ESC key
-      const handleEsc = (e: KeyboardEvent) => {
-        if (e.key === 'Escape' && onClose) {
-          onClose();
-        }
-      };
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'Escape' && closeOnEsc && onClose) {
+        e.preventDefault();
+        onClose();
+      }
+    };
 
-      document.addEventListener('keydown', handleEsc);
-      return () => document.removeEventListener('keydown', handleEsc);
+    document.addEventListener('keydown', handleKeyDown);
+    return () => document.removeEventListener('keydown', handleKeyDown);
+  }, [open, closeOnEsc, onClose]);
+
+  useEffect(() => {
+    if (open && modalRef.current) {
+      modalRef.current.focus();
     }
-  }, [open, onClose]);
+  }, [open]);
 
-  const handleBackdropClick = (e: React.MouseEvent<HTMLDivElement>) => {
-    if (closeOnBackdrop && e.target === e.currentTarget && onClose) {
+  const handleBackdropClick = (e: React.MouseEvent) => {
+    if (e.target === e.currentTarget && closeOnBackdrop && onClose) {
       onClose();
     }
   };
 
-  const modalStyle: CSSProperties = {
-    '--modal-z-index': zIndex,
-  } as CSSProperties;
+  if (!open) return null;
 
-  const contentStyle: CSSProperties = {
+  const modalStyle: React.CSSProperties = {
     width: typeof width === 'number' ? `${width}px` : width,
-    height: typeof height === 'number' ? `${height}px` : height,
     maxWidth: typeof maxWidth === 'number' ? `${maxWidth}px` : maxWidth,
+    height: height === 'auto' ? 'auto' : `${height}px`,
     maxHeight: typeof maxHeight === 'number' ? `${maxHeight}px` : maxHeight,
-    top: top || '50%',
-    left: left || '50%',
-    transform: top || left ? 'none' : 'translate(-50%, -50%)',
+    zIndex,
   };
 
-  if (!open) return null;
+  const containerStyle: React.CSSProperties = {
+    zIndex,
+  };
 
   return createPortal(
     <div
-      ref={modalRef}
-      className={`modal-container ${showBackdrop ? 'modal-with-backdrop' : ''}`}
-      style={modalStyle}
+      className={`modal-container ${backdrop ? 'modal-backdrop' : ''}`}
+      style={containerStyle}
       onClick={handleBackdropClick}
-      tabIndex={-1}
-      data-qa-xui="Modal"
+      data-testid={testId}
     >
       <div
-        ref={contentRef}
+        ref={modalRef}
         className={`modal-content ${className}`}
-        style={contentStyle}
+        style={modalStyle}
+        tabIndex={-1}
         onClick={(e) => e.stopPropagation()}
       >
         {children}
@@ -100,20 +113,34 @@ export function Modal({
 export interface ModalHeaderProps {
   children?: ReactNode;
   onClose?: () => void;
+  showCloseButton?: boolean;
   className?: string;
 }
 
-export function ModalHeader({ children, onClose, className = '' }: ModalHeaderProps) {
+export function ModalHeader({
+  children,
+  onClose,
+  showCloseButton = true,
+  className = '',
+}: ModalHeaderProps) {
   return (
     <div className={`modal-header ${className}`}>
-      <div className="modal-header-title">{children}</div>
-      {onClose && (
+      <div className="modal-title">{children}</div>
+      {showCloseButton && onClose && (
         <button
-          className="modal-header-close"
+          className="modal-close-button"
           onClick={onClose}
           aria-label="Close"
+          type="button"
         >
-          ×
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+            <path
+              d="M18 6L6 18M6 6l12 12"
+              stroke="currentColor"
+              strokeWidth="2"
+              strokeLinecap="round"
+            />
+          </svg>
         </button>
       )}
     </div>
@@ -138,6 +165,4 @@ export function ModalFooter({ children, className = '' }: ModalFooterProps) {
   return <div className={`modal-footer ${className}`}>{children}</div>;
 }
 
-Modal.Header = ModalHeader;
-Modal.Body = ModalBody;
-Modal.Footer = ModalFooter;
+export default Modal;

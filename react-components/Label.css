@@ -1,25 +1,14 @@
-.label {
+.form-label {
   display: inline-block;
   font-family: 'Inter', sans-serif;
+  font-size: var(--text-sm);
   font-weight: var(--font-weight-semibold);
-  color: var(--foreground);
   line-height: 1.5;
+  color: var(--foreground);
   margin-bottom: 8px;
 }
 
-.label--sm {
-  font-size: var(--text-xs);
-}
-
-.label--md {
-  font-size: var(--text-sm);
-}
-
-.label--lg {
-  font-size: var(--text-base);
-}
-
-.label-required {
+.form-label-required {
   color: var(--destructive);
   margin-left: 4px;
   font-weight: var(--font-weight-bold);

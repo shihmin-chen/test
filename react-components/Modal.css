@@ -1,13 +1,13 @@
 .modal-container {
   position: fixed;
   inset: 0;
-  z-index: var(--modal-z-index, 1000);
   display: flex;
   align-items: center;
   justify-content: center;
+  z-index: 1000;
 }
 
-.modal-with-backdrop::before {
+.modal-backdrop::before {
   content: '';
   position: fixed;
   inset: 0;
@@ -16,15 +16,25 @@
 }
 
 .modal-content {
-  position: fixed;
+  position: relative;
   background-color: var(--card);
   border-radius: var(--radius-card);
   box-shadow: 0 0 8px 0 rgba(34, 34, 34, 0.27);
   display: flex;
   flex-direction: column;
-  overflow: hidden;
-  max-width: 90vw;
-  max-height: 90vh;
+  outline: none;
+  animation: modal-fade-in 0.2s ease-out;
+}
+
+@keyframes modal-fade-in {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
 }
 
 .modal-header {
@@ -33,54 +43,55 @@
   justify-content: space-between;
   padding: 24px 32px;
   border-bottom: 1px solid var(--border);
-  flex-shrink: 0;
 }
 
-.modal-header-title {
+.modal-title {
   font-family: 'Inter', sans-serif;
-  font-weight: var(--font-weight-semibold);
   font-size: var(--text-2xl);
+  font-weight: var(--font-weight-semibold);
   line-height: 1.4;
   color: var(--foreground);
 }
 
-.modal-header-close {
-  background: none;
+.modal-close-button {
+  background: transparent;
   border: none;
-  font-size: 32px;
-  line-height: 1;
-  color: var(--foreground);
+  padding: 8px;
   cursor: pointer;
-  padding: 0;
-  width: 32px;
-  height: 32px;
+  color: var(--muted-foreground);
   display: flex;
   align-items: center;
   justify-content: center;
-  border-radius: 50%;
-  transition: background-color 0.2s;
+  border-radius: 4px;
+  transition: all 0.2s;
 }
 
-.modal-header-close:hover {
+.modal-close-button:hover {
   background-color: var(--muted);
+  color: var(--foreground);
+}
+
+.modal-close-button:focus-visible {
+  outline: 2px solid var(--ring);
+  outline-offset: 2px;
 }
 
 .modal-body {
-  padding: 32px;
-  overflow: auto;
   flex: 1;
+  overflow: auto;
+  padding: 24px 32px;
   font-family: 'Inter', sans-serif;
   font-size: var(--text-base);
+  font-weight: var(--font-weight-medium);
   line-height: 1.5;
   color: var(--foreground);
 }
 
 .modal-footer {
   display: flex;
-  justify-content: flex-end;
   align-items: center;
-  gap: 16px;
-  padding: 24px 32px;
+  justify-content: flex-end;
+  gap: 12px;
+  padding: 16px 32px 24px;
   border-top: 1px solid var(--border);
-  flex-shrink: 0;
 }
