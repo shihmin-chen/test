@@ -19,22 +19,19 @@
 
 ```tsx
 // src/app/App.tsx
-import { Button, Input, Select, Checkbox } from './components/react-components';
+import { Button, Input, Card, Modal, Label } from './components/react-components';
 // ☝️ CSS 會自動載入，不需要額外 import！
 
 function App() {
   return (
     <div className="p-8">
-      <Button theme="primary">點擊我</Button>
-      <Input placeholder="輸入文字" />
-      <Select 
-        options={[
-          { value: '1', label: '選項 1' },
-          { value: '2', label: '選項 2' },
-        ]}
-        placeholder="請選擇"
-      />
-      <Checkbox label="同意條款" />
+      <Card>
+        <CardHeader>我的卡片</CardHeader>
+        <CardBody>
+          <Label htmlFor="name" required>姓名</Label>
+          <Input id="name" placeholder="輸入文字" />
+        </CardBody>
+      </Card>
     </div>
   );
 }
@@ -71,12 +68,6 @@ import { Button } from './components/react-components';
 
 // 載入狀態
 <Button loading>Loading...</Button>
-
-// 文字按鈕
-<Button display="text">Text Button</Button>
-
-// 連結按鈕
-<Button display="link" url="https://example.com">Link</Button>
 ```
 
 **Props:**
@@ -86,15 +77,198 @@ import { Button } from './components/react-components';
 - `outline?: boolean` - 外框樣式
 - `loading?: boolean` - 載入狀態
 - `disabled?: boolean` - 禁用狀態
-- `url?: string` - 連結 URL（會渲染為 `<a>` 標籤）
-- `icon?: ReactNode` - 圖示
+
+---
+
+### Card - 卡片容器組件 🆕
+
+```tsx
+import { Card, CardHeader, CardBody, CardFooter, CardIcon } from './components/react-components';
+import { Button } from './components/react-components';
+
+// 基本卡片
+<Card>
+  <CardHeader>卡片標題</CardHeader>
+  <CardBody>
+    <p>這是卡片內容</p>
+  </CardBody>
+  <CardFooter>
+    <Button theme="primary">確認</Button>
+    <Button theme="tertiary">取消</Button>
+  </CardFooter>
+</Card>
+
+// 帶圖示的卡片
+<Card>
+  <CardIcon>
+    <svg>...</svg>
+  </CardIcon>
+  <CardHeader>通知</CardHeader>
+  <CardBody>
+    <p>新訊息內容</p>
+  </CardBody>
+</Card>
+
+// 載入狀態的卡片
+<Card>
+  <CardHeader>載入中...</CardHeader>
+  <CardBody busy>
+    {/* 會顯示 spinner */}
+  </CardBody>
+</Card>
+```
+
+**Card Props:**
+- `children?: ReactNode` - 內容
+- `className?: string` - 自訂樣式
+
+**CardBody Props:**
+- `busy?: boolean` - 載入狀態（會顯示 spinner 覆蓋）
+
+**特點：**
+- 自動使用 `--card` 背景色
+- Grid 佈局（header, icon, body, footer）
+- 內建載入狀態
+- 使用 `--radius-card` 圓角
+- 使用 `--elevation-sm` 陰影
+
+---
+
+### Modal - 彈出視窗組件 🆕
+
+```tsx
+import { useState } from 'react';
+import { Modal, ModalHeader, ModalBody, ModalFooter } from './components/react-components';
+import { Button } from './components/react-components';
+
+function MyComponent() {
+  const [isOpen, setIsOpen] = useState(false);
+
+  return (
+    <>
+      <Button onClick={() => setIsOpen(true)}>開啟 Modal</Button>
+      
+      <Modal
+        open={isOpen}
+        onClose={() => setIsOpen(false)}
+        width={600}
+        closeOnBackdrop
+      >
+        <ModalHeader onClose={() => setIsOpen(false)}>
+          新增住院許可證
+        </ModalHeader>
+        
+        <ModalBody>
+          <p>Modal 內容...</p>
+        </ModalBody>
+        
+        <ModalFooter>
+          <Button theme="primary">確認</Button>
+          <Button theme="tertiary" onClick={() => setIsOpen(false)}>
+            取消
+          </Button>
+        </ModalFooter>
+      </Modal>
+    </>
+  );
+}
+```
+
+**Modal Props:**
+- `open: boolean` - 是否顯示（必填）
+- `onClose?: () => void` - 關閉回調
+- `backdrop?: boolean` - 是否顯示背景遮罩（預設 true）
+- `closeOnBackdrop?: boolean` - 點擊背景關閉（預設 false）
+- `closeOnEsc?: boolean` - 按 ESC 關閉（預設 true）
+- `width?: number` - 寬度（預設 500px）
+- `maxWidth?: string | number` - 最大寬度（預設 90vw）
+- `height?: number | 'auto'` - 高度（預設 'auto'）
+- `maxHeight?: string | number` - 最大高度（預設 90vh）
+
+**ModalHeader Props:**
+- `showCloseButton?: boolean` - 顯示關閉按鈕（預設 true）
+- `onClose?: () => void` - 關閉回調
+
+**特點：**
+- 使用 Portal 渲染到 body
+- 支援鍵盤操作（ESC 關閉）
+- 漸入動畫
+- 自動 focus 管理
+- 背景遮罩可選
+
+---
+
+### Divider - 分隔線組件 🆕
+
+```tsx
+import { Divider } from './components/react-components';
+
+// 預設分隔線（中間間距）
+<Divider />
+
+// 全寬分隔線
+<Divider variant="fullWidth" />
+
+// 不同間距大小
+<Divider size="sm" />  {/* 8px 左右間距 */}
+<Divider size="md" />  {/* 16px 左右間距（預設）*/}
+<Divider size="lg" />  {/* 32px 左右間距 */}
+
+// 使用 div 而非 hr
+<Divider as="div" />
+```
+
+**Props:**
+- `variant?: 'middle' | 'fullWidth'` - 變體（預設 'middle'）
+- `size?: 'sm' | 'md' | 'lg'` - 間距大小（預設 'md'）
+- `as?: 'hr' | 'div'` - HTML 元素（預設 'hr'）
+- `className?: string` - 自訂樣式
+
+---
+
+### Label - 表單標籤組件 🆕
+
+```tsx
+import { Label, Input } from './components/react-components';
+
+// 基本用法
+<div>
+  <Label htmlFor="username">用戶名</Label>
+  <Input id="username" />
+</div>
+
+// 必填標記（紅色星號）
+<div>
+  <Label htmlFor="email" required>
+    Email
+  </Label>
+  <Input id="email" type="email" />
+</div>
+
+// 自訂必填標記
+<Label required requiredIndicator="（必填）">
+  姓名
+</Label>
+```
+
+**Props:**
+- `children: ReactNode` - 標籤文字（必填）
+- `htmlFor?: string` - 對應的 input id
+- `required?: boolean` - 是否必填
+- `requiredIndicator?: string` - 必填標記（預設 '*'）
+- `className?: string` - 自訂樣式
+
+**特點：**
+- 使用 `--text-sm` 字體大小
+- 必填標記使用 `--destructive` 顏色
+- 半粗體
 
 ---
 
 ### Input - 輸入框組件
 
 ```tsx
-import { Input } from './components/react-components';
+import { Input, Label } from './components/react-components';
 import { useState } from 'react';
 
 const [value, setValue] = useState('');
@@ -106,11 +280,11 @@ const [value, setValue] = useState('');
   placeholder="請輸入"
 />
 
-// 帶標籤
-<Input label="用戶名" placeholder="請輸入用戶名" />
-
-// 必填欄位
-<Input label="Email" required />
+// 配合 Label 使用
+<div>
+  <Label htmlFor="name" required>姓名</Label>
+  <Input id="name" placeholder="請輸入姓名" />
+</div>
 
 // 密碼輸入（帶顯示/隱藏按鈕）
 <Input type="password" label="密碼" />
@@ -118,30 +292,18 @@ const [value, setValue] = useState('');
 // 搜尋輸入（帶搜尋圖示）
 <Input type="search" placeholder="搜尋..." />
 
-// 錯誤狀態
-<Input 
-  error 
-  message="用戶名不能為空" 
-  placeholder="請輸入"
-/>
-
-// 小尺寸
-<Input size="sm" placeholder="Small input" />
-
-// 填充樣式
-<Input fill placeholder="填充樣式" />
+// 填充樣式（用於白色背景上）
+<div className="bg-card p-8">
+  <Input fill placeholder="填充樣式" />
+</div>
 ```
 
 **Props:**
-- `label?: string` - 標籤文字
-- `type?: string` - 輸入類型（text, password, search, email, number 等）
+- `label?: string` - 標籤文字（會自動產生 Label 組件）
+- `type?: string` - 輸入類型
 - `size?: 'sm' | 'md'` - 尺寸
 - `error?: boolean` - 錯誤狀態
-- `message?: string` - 提示訊息
-- `fill?: boolean` - 填充樣式
-- `borderless?: boolean` - 無邊框
-- `prefix?: ReactNode` - 前綴內容
-- `postfix?: ReactNode` - 後綴內容
+- `fill?: boolean` - 填充樣式（用於白色背景上）
 - `required?: boolean` - 必填標記
 
 ---
@@ -168,36 +330,23 @@ const options = [
   placeholder="請選擇水果"
 />
 
-// 白色主題
-<Select 
-  theme="white"
-  options={options}
-  value={selected}
-  onChange={setSelected}
-/>
-
-// 小尺寸
-<Select 
-  size="sm"
-  options={options}
-  value={selected}
-  onChange={setSelected}
-/>
-
-// 錯誤狀態
-<Select error options={options} />
+// 白色主題（用於淺灰背景上）
+<div className="bg-card p-8">
+  <Select 
+    theme="white"
+    options={options}
+    value={selected}
+    onChange={setSelected}
+  />
+</div>
 ```
 
 **Props:**
 - `value?: string` - 當前選中的值
 - `onChange?: (value: string) => void` - 變更回調
 - `options: SelectOption[]` - 選項列表
-- `placeholder?: string` - 占位符
-- `size?: 'sm' | 'md'` - 尺寸
 - `theme?: 'white' | 'grey'` - 主題
-- `error?: boolean` - 錯誤狀態
-- `disabled?: boolean` - 禁用狀態
-- `prefix?: ReactNode` - 前綴圖示
+- `size?: 'sm' | 'md'` - 尺寸
 
 ---
 
@@ -209,29 +358,12 @@ import { useState } from 'react';
 
 const [checked, setChecked] = useState(false);
 
-// 基本用法
 <Checkbox 
   label="我同意條款"
   checked={checked}
   onChange={(e) => setChecked(e.target.checked)}
 />
-
-// 不確定狀態
-<Checkbox indeterminate label="全選" />
-
-// 小尺寸
-<Checkbox size="sm" label="小尺寸" />
-
-// 錯誤狀態
-<Checkbox error label="必須同意" />
 ```
-
-**Props:**
-- `label?: ReactNode` - 標籤文字
-- `size?: 'sm' | 'md'` - 尺寸
-- `indeterminate?: boolean` - 不確定狀態
-- `error?: boolean` - 錯誤狀態
-- `disabled?: boolean` - 禁用狀態
 
 ---
 
@@ -252,25 +384,7 @@ const [selected, setSelected] = useState('option1');
   <Radio value="option2" label="選項 2" />
   <Radio value="option3" label="選項 3" disabled />
 </RadioGroup>
-
-// 小尺寸
-<RadioGroup name="size" value={selected} onChange={setSelected}>
-  <Radio value="sm" label="Small" size="sm" />
-  <Radio value="md" label="Medium" size="sm" />
-</RadioGroup>
 ```
-
-**RadioGroup Props:**
-- `name: string` - 群組名稱（必填）
-- `value?: string` - 當前選中的值
-- `onChange?: (value: string) => void` - 變更回調
-- `error?: boolean` - 錯誤狀態
-
-**Radio Props:**
-- `value: string` - 選項值（必填）
-- `label?: string` - 標籤文字
-- `size?: 'sm' | 'md'` - 尺寸
-- `disabled?: boolean` - 禁用狀態
 
 ---
 
@@ -282,25 +396,187 @@ import { useState } from 'react';
 
 const [message, setMessage] = useState('');
 
-// 基本用法
 <TextArea 
   value={message}
   onChange={(e) => setMessage(e.target.value)}
   placeholder="請輸入訊息..."
   rows={5}
 />
-
-// 錯誤狀態
-<TextArea error placeholder="錯誤狀態" />
-
-// 唯讀
-<TextArea readOnly value="無法編輯" />
 ```
 
-**Props:**
-- `rows?: number` - 行數（預設 3）
-- `error?: boolean` - 錯誤狀態
-- `readOnly?: boolean` - 唯讀
+---
+
+## 🎨 實戰範例
+
+### 範例 1：登入表單（使用 Modal + Card）
+
+```tsx
+import { useState } from 'react';
+import { 
+  Modal, ModalHeader, ModalBody, ModalFooter,
+  Input, Button, Label, Divider 
+} from './components/react-components';
+
+function LoginModal() {
+  const [isOpen, setIsOpen] = useState(false);
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+
+  return (
+    <>
+      <Button onClick={() => setIsOpen(true)}>登入</Button>
+      
+      <Modal
+        open={isOpen}
+        onClose={() => setIsOpen(false)}
+        width={450}
+      >
+        <ModalHeader onClose={() => setIsOpen(false)}>
+          登入帳號
+        </ModalHeader>
+        
+        <ModalBody>
+          <div className="space-y-4">
+            <div>
+              <Label htmlFor="email" required>Email</Label>
+              <Input 
+                id="email"
+                fill
+                type="email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                placeholder="your@email.com"
+              />
+            </div>
+            
+            <div>
+              <Label htmlFor="password" required>密碼</Label>
+              <Input 
+                id="password"
+                fill
+                type="password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                placeholder="••••••••"
+              />
+            </div>
+          </div>
+        </ModalBody>
+        
+        <ModalFooter>
+          <Button theme="primary">登入</Button>
+          <Button theme="tertiary" onClick={() => setIsOpen(false)}>
+            取消
+          </Button>
+        </ModalFooter>
+      </Modal>
+    </>
+  );
+}
+```
+
+### 範例 2：資料卡片（使用 Card）
+
+```tsx
+import { 
+  Card, CardHeader, CardBody, CardFooter, CardIcon,
+  Button, Divider 
+} from './components/react-components';
+
+function PatientCard() {
+  return (
+    <Card>
+      <CardIcon>
+        <svg width="48" height="48" viewBox="0 0 24 24">
+          {/* 圖示 SVG */}
+        </svg>
+      </CardIcon>
+      
+      <CardHeader>患者資訊</CardHeader>
+      
+      <CardBody>
+        <div className="space-y-2">
+          <div className="flex justify-between">
+            <span className="text-muted-foreground">姓名</span>
+            <span>王小明</span>
+          </div>
+          
+          <Divider size="sm" />
+          
+          <div className="flex justify-between">
+            <span className="text-muted-foreground">病歷號</span>
+            <span>A123456789</span>
+          </div>
+          
+          <Divider size="sm" />
+          
+          <div className="flex justify-between">
+            <span className="text-muted-foreground">就診日期</span>
+            <span>2026-01-12</span>
+          </div>
+        </div>
+      </CardBody>
+      
+      <CardFooter>
+        <Button theme="primary">檢視詳情</Button>
+        <Button theme="tertiary">編輯</Button>
+      </CardFooter>
+    </Card>
+  );
+}
+```
+
+### 範例 3：表單區塊（使用 Card + Label）
+
+```tsx
+import { 
+  Card, CardHeader, CardBody,
+  Label, Input, Select, Button 
+} from './components/react-components';
+
+function ProfileForm() {
+  return (
+    <div className="bg-background p-8">
+      <Card>
+        <CardHeader>個人資料</CardHeader>
+        
+        <CardBody>
+          <div className="space-y-4">
+            {/* 在白色卡片上使用 fill Input */}
+            <div>
+              <Label htmlFor="name" required>姓名</Label>
+              <Input id="name" fill placeholder="請輸入姓名" />
+            </div>
+            
+            <div>
+              <Label htmlFor="phone" required>電話</Label>
+              <Input id="phone" fill placeholder="請輸入電話" />
+            </div>
+            
+            <div>
+              <Label htmlFor="city">城市</Label>
+              <Select
+                id="city"
+                theme="white"
+                options={[
+                  { value: 'taipei', label: '台北市' },
+                  { value: 'taichung', label: '台中市' },
+                ]}
+                placeholder="請選擇"
+              />
+            </div>
+            
+            <div className="flex gap-2 pt-4">
+              <Button theme="primary">儲存</Button>
+              <Button theme="tertiary">取消</Button>
+            </div>
+          </div>
+        </CardBody>
+      </Card>
+    </div>
+  );
+}
+```
 
 ---
 
@@ -310,196 +586,74 @@ const [message, setMessage] = useState('');
 
 ```css
 :root {
-  /* 顏色 */
+  /* 背景顏色 */
+  --background: #F5F5F5;     /* 頁面背景（深灰） */
+  --card: #F2F2F2;           /* 卡片背景（淺灰） */
+  
+  /* 主要顏色 */
   --primary: rgba(0, 103, 204, 1.00);
   --destructive: rgba(191, 46, 58, 1.00);
-  --muted: rgba(26, 26, 26, 0.09);
+  
+  /* 邊框與分隔 */
   --border: rgba(26, 26, 26, 0.3);
   
   /* 圓角 */
   --radius-button: 8px;
+  --radius-card: 8px;
+  
+  /* 陰影 */
+  --elevation-sm: 0px 1px 2px 0px rgba(0, 0, 0, 0.05);
   
   /* 字型 */
   --text-sm: 14px;
   --text-base: 16px;
+  --text-2xl: 24px;
   --font-weight-medium: 500;
+  --font-weight-semibold: 600;
 }
 ```
 
-### 自訂設計系統
+### 使用指南（參考 STYLING_GUIDELINES.md）
 
-如果你想使用自己的設計系統，修改 `react-components/theme.css` 中的變數即可：
+**Input 樣式選擇：**
+- 在深灰背景（`bg-background`）上：使用 `<Input />` (預設，白底有邊框)
+- 在淺灰背景（`bg-card`）上：使用 `<Input fill />` (深灰底無邊框)
 
-```css
-/* react-components/theme.css */
-:root {
-  --primary: #YOUR_COLOR;        /* 改成你的主色 */
-  --radius-button: 12px;         /* 改成你的圓角 */
-  /* ... 其他變數 */
-}
-```
+**Select 主題選擇：**
+- 在深灰背景上：使用 `theme="grey"` (預設)
+- 在淺灰背景上：使用 `theme="white"`
+
+---
+
+## 📋 完整組件列表
+
+✅ **已完成 (10/33)**
+
+**基礎組件：**
+- Button - 按鈕
+- Input - 輸入框
+- Select - 下拉選單
+- Checkbox - 核取方塊
+- Radio / RadioGroup - 單選按鈕
+- TextArea - 多行輸入
+
+**容器與佈局：** 🆕
+- Card - 卡片容器
+- Modal - 彈出視窗
+- Divider - 分隔線
+- Label - 表單標籤
+
+⏳ **待轉換 (23 個組件)**
 
 ---
 
 ## 🔧 進階用法
 
-### 方法 A：從 index 導入（推薦）
+### 從 index 導入（推薦）
 
 ```tsx
-import { Button, Input, Select } from './components/react-components';
+import { Button, Input, Card, Modal, Label } from './components/react-components';
 // CSS 自動載入 ✅
-```
-
-### 方法 B：單獨導入組件
-
-```tsx
-import { Button } from './components/react-components/Button';
-import './components/react-components/Button.css';  // 需要手動導入 CSS
-```
-
-### 方法 C：導入 all.css
-
-```tsx
-import './components/react-components/all.css';  // 一次載入所有 CSS
-import { Button } from './components/react-components/Button';
-```
-
----
-
-## 📋 完整範例
-
-```tsx
-import { useState } from 'react';
-import { 
-  Button, 
-  Input, 
-  Select, 
-  Checkbox, 
-  Radio, 
-  RadioGroup,
-  TextArea 
-} from './components/react-components';
-
-function FormExample() {
-  const [name, setName] = useState('');
-  const [fruit, setFruit] = useState('');
-  const [agreed, setAgreed] = useState(false);
-  const [gender, setGender] = useState('');
-  const [message, setMessage] = useState('');
-
-  const handleSubmit = () => {
-    console.log({ name, fruit, agreed, gender, message });
-  };
-
-  return (
-    <div className="max-w-md mx-auto p-8 space-y-4">
-      <h1>表單範例</h1>
-      
-      <Input 
-        label="姓名"
-        value={name}
-        onChange={(e) => setName(e.target.value)}
-        placeholder="請輸入姓名"
-        required
-      />
-      
-      <div>
-        <label className="block mb-2">選擇水果</label>
-        <Select 
-          options={[
-            { value: 'apple', label: '蘋果' },
-            { value: 'banana', label: '香蕉' },
-            { value: 'orange', label: '橙子' },
-          ]}
-          value={fruit}
-          onChange={setFruit}
-          placeholder="請選擇"
-        />
-      </div>
-      
-      <Checkbox 
-        label="我同意服務條款"
-        checked={agreed}
-        onChange={(e) => setAgreed(e.target.checked)}
-      />
-      
-      <div>
-        <label className="block mb-2">性別</label>
-        <RadioGroup 
-          name="gender"
-          value={gender}
-          onChange={setGender}
-        >
-          <Radio value="male" label="男" />
-          <Radio value="female" label="女" />
-          <Radio value="other" label="其他" />
-        </RadioGroup>
-      </div>
-      
-      <TextArea 
-        value={message}
-        onChange={(e) => setMessage(e.target.value)}
-        placeholder="留言..."
-        rows={4}
-      />
-      
-      <div className="flex gap-2">
-        <Button theme="primary" onClick={handleSubmit}>提交</Button>
-        <Button theme="tertiary">取消</Button>
-      </div>
-    </div>
-  );
-}
-
-export default FormExample;
-```
-
----
-
-## 💡 使用提示
-
-### ✅ 推薦做法
-
-```tsx
-// ✅ 從 index 導入，CSS 自動載入
-import { Button, Input } from './components/react-components';
-
-// ✅ 使用 TypeScript 類型
-import type { ButtonProps, InputProps } from './components/react-components';
-```
-
-### ❌ 不推薦做法
-
-```tsx
-// ❌ 忘記導入 CSS
-import { Button } from './components/react-components/Button';
-// 組件會沒有樣式！
-
-// ❌ 重複導入 CSS
-import './components/react-components/all.css';
-import './components/react-components/Button.css';  // 重複了
-```
-
----
-
-## 🚨 疑難排解
-
-### 問題：組件沒有樣式
-
-**檢查清單：**
-1. ✅ 是否從 `'./components/react-components'` 導入？（推薦）
-2. ✅ 或者是否手動導入了 `all.css`？
-3. ✅ 路徑是否正確？（根據你的資料夾結構調整）
-
-### 問題：顏色不對
-
-檢查 `react-components/theme.css` 中的 CSS 變數是否符合你的設計系統。
-
-### 問題：字體不對
-
-確保已引入 Inter 字體：
-```css
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
 ```
 
 ---
@@ -508,40 +662,26 @@ import './components/react-components/Button.css';  // 重複了
 
 ```
 react-components/
-├── index.tsx            ← 主要入口點（自動載入 CSS）
-├── all.css              ← 所有樣式的集合
-├── theme.css            ← 設計系統 CSS 變數
+├── index.tsx                    ← 主要入口點
+├── all.css                      ← 所有樣式集合
+├── theme.css                    ← 設計系統變數
+├── STYLING_GUIDELINES.md        ← 樣式使用指南
+├── README.md                    ← 本文件
+│
 ├── Button.tsx / .css
 ├── Input.tsx / .css
 ├── Select.tsx / .css
 ├── Checkbox.tsx / .css
 ├── Radio.tsx / .css
 ├── TextArea.tsx / .css
-└── README.md            ← 本文件
+├── Card.tsx / .css              🆕
+├── Modal.tsx / .css             🆕
+├── Divider.tsx / .css           🆕
+└── Label.tsx / .css             🆕
 ```
 
 ---
 
-## 🎯 快速檢查清單
-
-使用組件前，確認：
-
-- [ ] 已從 GitHub 複製所有檔案到專案
-- [ ] 使用 `import { ... } from './components/react-components'` 導入
-- [ ] 組件有正確的顏色和樣式
-- [ ] Inter 字體已載入
-
----
-
-## 🔄 轉換狀態
-
-✅ **已完成 (6/33)**
-- Button, Input, Select, Checkbox, Radio, TextArea
-
-⏳ **待轉換 (27 個組件)**
-
----
-
 **Repository:** https://github.com/shihmin-chen/test  
-**版本:** 1.1.0  
+**版本:** 1.2.0  
 **最後更新:** 2026-01-12
