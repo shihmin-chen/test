@@ -2,7 +2,102 @@
 
 這是從 Vue XUI 組件庫轉換而來的 React 組件庫，完全使用設計系統 CSS 變數。
 
-## 已轉換的組件
+## ⚠️ 重要：正確的設定步驟
+
+### 方法 A：一次導入所有樣式（推薦）
+
+在你的主要 CSS 檔案（如 `/src/styles/global.css` 或 `/src/app/App.tsx`）中：
+
+```tsx
+// 在 App.tsx 或 main.tsx 的最頂端導入
+import '../react-components/all.css';
+```
+
+**或** 在你的全域 CSS 檔案中：
+
+```css
+/* global.css */
+@import '../react-components/all.css';
+```
+
+### 方法 B：按需導入個別組件樣式
+
+```tsx
+// 必須先導入 theme.css（設計系統變數）
+import './react-components/theme.css';
+
+// 然後導入需要的組件樣式
+import { Button } from './react-components/Button';
+import './react-components/Button.css';
+
+import { Input } from './react-components/Input';
+import './react-components/Input.css';
+```
+
+---
+
+## 🚨 常見問題排除
+
+### 問題：組件外觀跑掉、沒有樣式
+
+**原因：** CSS 檔案沒有被導入
+
+**解決方法：**
+
+1. **確認已導入 `all.css`** 或個別組件的 CSS
+2. **確認 `theme.css` 已被載入**（它包含所有 CSS 變數）
+3. **檢查導入路徑是否正確**
+
+**範例：完整的 App.tsx**
+
+```tsx
+// ✅ 正確的做法
+import './react-components/all.css'; // 第一步：導入所有樣式
+
+import { Button } from './react-components/Button';
+import { Input } from './react-components/Input';
+import { Select } from './react-components/Select';
+
+function App() {
+  return (
+    <div>
+      <Button theme="primary">點擊我</Button>
+      <Input placeholder="輸入文字" />
+    </div>
+  );
+}
+
+export default App;
+```
+
+### 問題：顏色不對、圓角不對
+
+**原因：** 你的專案可能有自己的 `theme.css`，覆蓋了組件的變數
+
+**解決方法：**
+
+選項 1：使用組件庫的 `theme.css`
+```tsx
+import './react-components/theme.css';
+```
+
+選項 2：在你的 `theme.css` 中確保有這些變數：
+```css
+:root {
+  --primary: rgba(0, 103, 204, 1.00);
+  --primary-foreground: rgba(255, 255, 255, 1.00);
+  --destructive: rgba(191, 46, 58, 1.00);
+  --muted: rgba(26, 26, 26, 0.09);
+  --muted-foreground: rgba(26, 26, 26, 0.35);
+  --border: rgba(26, 26, 26, 0.3);
+  --radius-button: 8px;
+  /* ...其他變數 */
+}
+```
+
+---
+
+## 📦 已包含的組件
 
 ### 1. Button
 基礎按鈕組件，支援多種主題、尺寸和狀態。
@@ -19,8 +114,7 @@
 
 **使用範例:**
 ```tsx
-import { Button } from './Button';
-import './Button.css';
+import { Button } from './react-components/Button';
 
 <Button theme="primary">Primary Button</Button>
 <Button theme="danger" size="sm">Small Danger</Button>
@@ -46,8 +140,7 @@ import './Button.css';
 
 **使用範例:**
 ```tsx
-import { Input } from './Input';
-import './Input.css';
+import { Input } from './react-components/Input';
 
 <Input 
   label="Username" 
@@ -76,8 +169,7 @@ import './Input.css';
 
 **使用範例:**
 ```tsx
-import { Select } from './Select';
-import './Select.css';
+import { Select } from './react-components/Select';
 
 const options = [
   { value: 'option1', label: 'Option 1' },
@@ -106,8 +198,7 @@ const options = [
 
 **使用範例:**
 ```tsx
-import { Checkbox } from './Checkbox';
-import './Checkbox.css';
+import { Checkbox } from './react-components/Checkbox';
 
 <Checkbox 
   label="I agree to terms"
@@ -136,8 +227,7 @@ import './Checkbox.css';
 
 **使用範例:**
 ```tsx
-import { Radio, RadioGroup } from './Radio';
-import './Radio.css';
+import { Radio, RadioGroup } from './react-components/Radio';
 
 <RadioGroup 
   name="choice"
@@ -161,8 +251,7 @@ import './Radio.css';
 
 **使用範例:**
 ```tsx
-import { TextArea } from './TextArea';
-import './TextArea.css';
+import { TextArea } from './react-components/TextArea';
 
 <TextArea 
   rows={5}
@@ -174,9 +263,9 @@ import './TextArea.css';
 
 ---
 
-## 設計系統整合
+## 🎨 設計系統整合
 
-所有組件都使用以下 CSS 變數（需在專案的 theme.css 中定義）：
+所有組件都使用以下 CSS 變數（定義在 `theme.css`）：
 
 ### 必需的 CSS 變數
 
@@ -228,37 +317,120 @@ import './TextArea.css';
 
 ---
 
-## 安裝與使用
+## 📥 完整安裝範例
 
-### 在 Figma Make 專案中使用
+### 步驟 1：複製組件到專案
 
-1. 將整個 `react-components` 資料夾複製到專案中
-2. 導入需要的組件和對應的 CSS：
-
-```tsx
-import { Button } from './react-components/Button';
-import './react-components/Button.css';
-
-import { Input } from './react-components/Input';
-import './react-components/Input.css';
-```
-
-3. 確保專案的 `theme.css` 包含所有必需的 CSS 變數
-
----
-
-## 從 GitHub 直接使用
-
-在新的 Figma Make 專案中，可以直接從 GitHub 讀取組件：
-
+在 Figma Make 中，告訴 AI：
 ```
 請從 GitHub repo https://github.com/shihmin-chen/test 
-的 react-components 資料夾讀取 UI 組件並複製到這個專案
+的 react-components 資料夾讀取所有檔案並複製到這個專案的 /src/components/react-components/
+```
+
+### 步驟 2：在 App.tsx 導入樣式
+
+```tsx
+// src/app/App.tsx
+import './components/react-components/all.css'; // ✅ 導入所有組件樣式
+
+import { Button } from './components/react-components/Button';
+import { Input } from './components/react-components/Input';
+import { Select } from './components/react-components/Select';
+
+function App() {
+  return (
+    <div className="p-8">
+      <h1>測試組件</h1>
+      
+      <div className="flex gap-4 mt-4">
+        <Button theme="primary">Primary</Button>
+        <Button theme="danger">Danger</Button>
+        <Button theme="warning">Warning</Button>
+      </div>
+      
+      <div className="mt-4">
+        <Input label="姓名" placeholder="請輸入姓名" />
+      </div>
+      
+      <div className="mt-4">
+        <Select 
+          options={[
+            { value: '1', label: '選項 1' },
+            { value: '2', label: '選項 2' },
+          ]}
+          placeholder="請選擇"
+        />
+      </div>
+    </div>
+  );
+}
+
+export default App;
+```
+
+### 步驟 3：確認樣式生效
+
+檢查瀏覽器：
+- ✅ 按鈕有藍色背景和白色文字
+- ✅ 輸入框有正確的邊框和圓角
+- ✅ 所有組件使用 Inter 字體
+
+---
+
+## 🔧 進階設定
+
+### 自訂設計系統顏色
+
+如果你想使用自己的設計系統顏色，有兩種方法：
+
+**方法 1：修改 theme.css**
+```css
+/* react-components/theme.css */
+:root {
+  --primary: #你的主色; /* 改成你的顏色 */
+  --radius-button: 12px; /* 改成你的圓角 */
+  /* ... */
+}
+```
+
+**方法 2：在你的全域 CSS 中覆蓋**
+```css
+/* global.css */
+@import './react-components/all.css';
+
+/* 覆蓋設計系統變數 */
+:root {
+  --primary: #FF6B6B !important;
+  --radius-button: 16px !important;
+}
 ```
 
 ---
 
-## 設計原則
+## 📊 檔案結構
+
+```
+react-components/
+├── all.css              ← 導入所有樣式的檔案
+├── theme.css            ← 設計系統 CSS 變數
+├── Button.tsx
+├── Button.css
+├── Input.tsx
+├── Input.css
+├── Select.tsx
+├── Select.css
+├── Checkbox.tsx
+├── Checkbox.css
+├── Radio.tsx
+├── Radio.css
+├── TextArea.tsx
+├── TextArea.css
+└── README.md            ← 本檔案
+```
+
+---
+
+## ✅ 設計原則
 
 ✅ **完全使用 CSS 變數** - 所有顏色、字型、圓角都來自設計系統變數  
 ✅ **響應式設計** - 支援不同尺寸 (sm, md, lg)  
@@ -268,7 +440,7 @@ import './react-components/Input.css';
 
 ---
 
-## 轉換狀態
+## 🚀 轉換狀態
 
 ✅ **已完成 (6/33)**
 - Button
@@ -283,8 +455,24 @@ import './react-components/Input.css';
 
 ---
 
-## 貢獻與回饋
+## 💡 快速檢查清單
 
-如需轉換更多組件或發現問題，請在 GitHub 建立 Issue。
+使用組件前，請確認：
 
-**Repository:** https://github.com/shihmin-chen/test
+- [ ] 已導入 `all.css` 或個別組件的 CSS
+- [ ] `theme.css` 的 CSS 變數已載入
+- [ ] Inter 字體已引入
+- [ ] 組件路徑正確（根據你的資料夾結構調整）
+
+---
+
+## 🆘 需要幫助？
+
+**GitHub Repository:** https://github.com/shihmin-chen/test  
+**問題回報：** 在 GitHub 上建立 Issue
+
+---
+
+**版本：** 1.0.0  
+**最後更新：** 2026-01-12  
+**作者：** 從 Vue XUI 轉換
