@@ -1,12 +1,17 @@
+/* Developers: Use react-components/theme.css as the single source of truth for background (--background) and card radius (--radius-card).
+   The Figma-generated CSS under ./_figma/ is kept for reference but should NOT be imported directly because it may define conflicting tokens. */
+
+/* Commented out direct imports of Figma-generated CSS to avoid token conflicts. */
+/* @import './_figma/base-light.css'; */
+/* @import './_figma/grey.css'; */
+/* @import './_figma/green.css'; */
+/* @import './_figma/yellow.css'; */
+/* @import './_figma/font.css'; */
+/* @import './_figma/effect.css'; */
+
 @import './normalize.css';
 @import './fonts.css';
 @import './brightness.css';
-@import './_figma/base-light.css';
-@import './_figma/grey.css';
-@import './_figma/green.css';
-@import './_figma/yellow.css';
-@import './_figma/font.css';
-@import './_figma/effect.css';
 @import './tippy-theme';
 
 :root {
@@ -21,3 +26,5 @@ body {
     'Microsoft JhengHei UI', 'Microsoft JhengHei', sans-serif;
   color: var(--xv-text--high-emphasis-text);
 }
+
+/* keep rest of file intact (no other changes) */
