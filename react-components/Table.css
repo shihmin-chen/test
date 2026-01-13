@@ -1,0 +1,146 @@
+/* Table Wrapper */
+.x-table-wrapper {
+  width: 100%;
+  overflow: auto;
+  border-radius: var(--radius-card);
+}
+
+.x-table-wrapper--bordered {
+  border: 1px solid var(--border);
+}
+
+/* Table */
+.x-table {
+  width: 100%;
+  border-collapse: collapse;
+  border-spacing: 0;
+  background-color: var(--card);
+  font-size: var(--text-base);
+}
+
+/* Table Header */
+.x-table thead {
+  background-color: var(--muted);
+}
+
+.x-table-th {
+  padding: 0.75rem 1rem;
+  text-align: left;
+  font-weight: 500;
+  color: var(--muted-foreground);
+  white-space: nowrap;
+  border-bottom: 1px solid var(--border);
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  background-color: var(--muted);
+}
+
+.x-table-th--sortable {
+  cursor: pointer;
+  user-select: none;
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+.x-table-th--sortable:hover {
+  background-color: var(--accent);
+}
+
+.x-table-sort-icon {
+  margin-left: 0.25rem;
+  color: var(--muted-foreground);
+}
+
+/* Table Body */
+.x-table tbody {
+  background-color: var(--card);
+}
+
+.x-table-row {
+  border-bottom: 1px solid var(--border);
+  transition: background-color 0.2s ease;
+}
+
+.x-table-row:last-child {
+  border-bottom: none;
+}
+
+.x-table--hover .x-table-row:hover {
+  background-color: var(--accent);
+}
+
+.x-table-row--clickable {
+  cursor: pointer;
+}
+
+.x-table-row--clickable:active {
+  background-color: var(--muted);
+}
+
+.x-table-row--selected {
+  background-color: var(--primary);
+  color: var(--primary-foreground);
+}
+
+.x-table-row--selected:hover {
+  background-color: var(--primary);
+}
+
+/* Table Cell */
+.x-table td {
+  padding: 0.75rem 1rem;
+  color: var(--foreground);
+}
+
+/* Striped */
+.x-table--striped tbody tr:nth-child(odd) {
+  background-color: var(--muted);
+}
+
+/* Compact Mode */
+.x-table--compact .x-table-th,
+.x-table--compact td {
+  padding: 0.5rem 0.75rem;
+}
+
+/* Loading State */
+.x-table-loading {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  color: var(--muted-foreground);
+}
+
+.x-table-loading-spinner {
+  width: 2rem;
+  height: 2rem;
+  border: 3px solid var(--border);
+  border-top-color: var(--primary);
+  border-radius: 50%;
+  animation: x-table-spin 0.6s linear infinite;
+}
+
+@keyframes x-table-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Empty State */
+.x-table-empty {
+  color: var(--muted-foreground);
+}
+
+/* Responsive - Horizontal Scroll */
+@media (max-width: 768px) {
+  .x-table-wrapper {
+    overflow-x: auto;
+  }
+
+  .x-table {
+    min-width: 600px;
+  }
+}
