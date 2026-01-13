@@ -7,6 +7,52 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
+## [1.4.1] - 2026-01-12
+
+### Fixed
+- **Select** - Added `fill` prop to match Input component's fill mode
+- **Select** - Corrected dropdown arrow icon to match Vue original (caret-down style)
+- **Checkbox** - Updated check icon SVG to match Vue original design
+- **Button tertiary** - Changed to grey outline style instead of solid grey background
+
+### Details
+
+#### Select Component
+- Added `fill?: boolean` prop for darker background without border
+- `fill` mode works like Input component - use on white backgrounds (`bg-card`)
+- Default mode (white background with border) for grey backgrounds (`bg-background`)
+- Corrected arrow icon from generic chevron to proper caret-down design
+
+```tsx
+// On grey background
+<Select options={options} />
+
+// On white background  
+<div className="bg-card">
+  <Select options={options} fill />
+</div>
+```
+
+#### Checkbox Component
+- Updated checkmark SVG to use proper stroke-based design
+- Matches Vue component's original icon exactly
+- Better visual consistency with design system
+
+#### Button Component
+- Tertiary theme now renders as outlined button (border only)
+- Removes confusing solid grey button variant
+- Consistent with other outline variants (primary, danger, warning)
+
+```tsx
+// Old: solid grey button
+<Button theme="tertiary">Grey Solid</Button>
+
+// New: grey outline button
+<Button theme="tertiary">Grey Outline</Button>
+```
+
+---
+
 ## [1.4.0] - 2026-01-12
 
 ### Added
@@ -133,6 +179,20 @@ None yet - this is the initial release series.
 None yet.
 
 ### Upgrade Guide
+
+#### From 1.4.0 to 1.4.1
+
+No breaking changes. The updates are all fixes and enhancements:
+
+1. **Select**: If you want fill mode, add `fill` prop:
+   ```tsx
+   <Select fill options={options} />
+   ```
+
+2. **Button tertiary**: Visual change only - now displays as outline instead of solid.
+   No code changes needed.
+
+3. **Checkbox & Select icons**: Visual improvements only. No code changes needed.
 
 #### From 1.3.0 to 1.4.0
 
