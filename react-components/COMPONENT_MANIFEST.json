@@ -129,17 +129,13 @@
     }
   ],
   "installation": {
-    "method": "github",
-    "steps": [
-      "Read COMPONENT_MANIFEST.json to discover components",
-      "Copy all files from react-components/ to /src/components/react-components/",
-      "Comment out @import './theme.css'; in /src/styles/index.css",
-      "Import components: import { Button, Card } from './components/react-components'"
-    ]
+    "method": "ai-assisted",
+    "source": "https://github.com/shihmin-chen/test",
+    "instructions": "Follow the steps in AI_README.md"
   },
   "designSystem": {
     "colors": {
-      "background": "#F5F5F5",
+      "background": "#D9D9DB",
       "card": "#F2F2F2",
       "primary": "#0067CC",
       "destructive": "#BF2E3A"
@@ -160,23 +156,15 @@
   "documentation": [
     {
       "file": "README.md",
-      "description": "Complete usage guide with examples"
+      "description": "Primary guide for human developers."
     },
     {
-      "file": "STYLING_GUIDELINES.md",
-      "description": "When to use Input fill, Select theme, etc."
-    },
-    {
-      "file": "THEME_CONFLICT_FIX.md",
-      "description": "How to resolve theme.css conflicts"
-    },
-    {
-      "file": "AI_SETUP_GUIDE.md",
-      "description": "Step-by-step guide for AI assistants"
+      "file": "AI_README.md",
+      "description": "Instruction manual for AI assistants."
     },
     {
       "file": "CHANGELOG.md",
-      "description": "Version history and updates"
+      "description": "Version history and updates."
     }
   ]
 }

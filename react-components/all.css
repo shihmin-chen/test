@@ -1,3 +1,6 @@
+/* Import theme variables first */
+@import './theme.css';
+
 /* Import all component stylesheets */
 @import './Button.css';
 @import './Input.css';

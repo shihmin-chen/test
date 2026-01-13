@@ -80,7 +80,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Warning comment in theme.css about background color
 
 ### Fixed
-- **theme.css** - Changed `--background` from green (#CCDBC8) to correct gray (#F5F5F5)
+- **theme.css** - Changed `--background` from green (#CCDBC8) to correct gray (#D9D9DB)
 - Ensured all colors match STYLING_GUIDELINES.md specifications
 
 ---
