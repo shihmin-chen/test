@@ -27,7 +27,7 @@
 - ❌ 不是 `rgb(255, 255, 255)` (白色)
 - ❌ 不是 `rgb(204, 219, 200)` (綠色)
 
-📖 **詳細說明請參考：** [THEME_CONFLICT_FIX.md](./THEME_CONFLICT_FIX.md)
+📖 **詳細說明請參考：** [TROUBLESHOOTING.md](./TROUBLESHOOTING.md)
 
 ---
 
@@ -90,7 +90,7 @@ import { Button } from './components/react-components';
 // 不同主題
 <Button theme="danger">Danger</Button>
 <Button theme="warning">Warning</Button>
-<Button theme="tertiary">Tertiary</Button>
+<Button theme="tertiary">Tertiary (灰色外框)</Button>
 
 // 不同尺寸
 <Button size="sm">Small</Button>
@@ -107,10 +107,172 @@ import { Button } from './components/react-components';
 **Props:**
 - `display?: 'button' | 'text' | 'link'` - 顯示類型
 - `theme?: 'primary' | 'danger' | 'warning' | 'tertiary'` - 主題顏色
+  - `tertiary` 現在是灰色外框樣式（不是實色）
 - `size?: 'sm' | 'md' | 'lg'` - 尺寸
 - `outline?: boolean` - 外框樣式
 - `loading?: boolean` - 載入狀態
 - `disabled?: boolean` - 禁用狀態
+
+---
+
+### Input - 輸入框組件
+
+```tsx
+import { Input, Label } from './components/react-components';
+import { useState } from 'react';
+
+const [value, setValue] = useState('');
+
+// 基本用法（白底有邊框）
+<Input 
+  value={value}
+  onChange={(e) => setValue(e.target.value)}
+  placeholder="請輸入"
+/>
+
+// 填充樣式（深灰底無邊框，用於白色背景上）
+<div className="bg-card p-8">
+  <Input fill placeholder="填充樣式" />
+</div>
+
+// 配合 Label 使用
+<div>
+  <Label htmlFor="name" required>姓名</Label>
+  <Input id="name" placeholder="請輸入姓名" />
+</div>
+
+// 密碼輸入（帶顯示/隱藏按鈕）
+<Input type="password" label="密碼" />
+
+// 搜尋輸入（帶搜尋圖示）
+<Input type="search" placeholder="搜尋..." />
+```
+
+**Props:**
+- `label?: string` - 標籤文字（會自動產生 Label 組件）
+- `type?: string` - 輸入類型
+- `size?: 'sm' | 'md'` - 尺寸
+- `error?: boolean` - 錯誤狀態
+- `fill?: boolean` - 填充樣式（深灰底無邊框，用於白色背景上）
+- `required?: boolean` - 必填標記
+
+**使用時機：**
+- 在深灰背景（`bg-background`）上：使用 `<Input />` (預設，白底有邊框)
+- 在淺灰/白色背景（`bg-card`）上：使用 `<Input fill />` (深灰底無邊框)
+
+---
+
+### Select - 下拉選單組件 🔄
+
+```tsx
+import { Select } from './components/react-components';
+import { useState } from 'react';
+
+const [selected, setSelected] = useState('');
+
+const options = [
+  { value: 'apple', label: '蘋果' },
+  { value: 'banana', label: '香蕉' },
+  { value: 'orange', label: '橙子', disabled: true },
+];
+
+// 基本用法（灰色背景，白底有邊框）
+<Select 
+  options={options}
+  value={selected}
+  onChange={setSelected}
+  placeholder="請選擇水果"
+/>
+
+// 白色主題（用於深灰背景上）
+<div className="bg-background p-8">
+  <Select 
+    theme="white"
+    options={options}
+    value={selected}
+    onChange={setSelected}
+  />
+</div>
+
+// 填充模式（深灰底無邊框，用於白色背景上）🆕
+<div className="bg-card p-8">
+  <Select 
+    fill
+    options={options}
+    value={selected}
+    onChange={setSelected}
+  />
+</div>
+```
+
+**Props:**
+- `value?: string` - 當前選中的值
+- `onChange?: (value: string) => void` - 變更回調
+- `options: SelectOption[]` - 選項列表
+- `theme?: 'white' | 'grey'` - 主題（預設 'grey'）
+- `fill?: boolean` - 填充模式（深灰底無邊框）🆕
+- `size?: 'sm' | 'md'` - 尺寸
+
+**使用時機：**
+- 在深灰背景（`bg-background`）上：使用 `theme="white"` 或 `theme="grey"` (預設)
+- 在淺灰/白色背景（`bg-card`）上：使用 `fill` prop
+- `fill` 和 `theme` 可以同時使用以微調外觀
+
+---
+
+### Checkbox - 核取方塊組件
+
+```tsx
+import { Checkbox } from './components/react-components';
+import { useState } from 'react';
+
+const [checked, setChecked] = useState(false);
+
+<Checkbox 
+  label="我同意條款"
+  checked={checked}
+  onChange={(e) => setChecked(e.target.checked)}
+/>
+```
+
+---
+
+### Radio / RadioGroup - 單選按鈕組件
+
+```tsx
+import { Radio, RadioGroup } from './components/react-components';
+import { useState } from 'react';
+
+const [selected, setSelected] = useState('option1');
+
+<RadioGroup 
+  name="choice"
+  value={selected}
+  onChange={setSelected}
+>
+  <Radio value="option1" label="選項 1" />
+  <Radio value="option2" label="選項 2" />
+  <Radio value="option3" label="選項 3" disabled />
+</RadioGroup>
+```
+
+---
+
+### TextArea - 多行文字輸入組件
+
+```tsx
+import { TextArea } from './components/react-components';
+import { useState } from 'react';
+
+const [message, setMessage] = useState('');
+
+<TextArea 
+  value={message}
+  onChange={(e) => setMessage(e.target.value)}
+  placeholder="請輸入訊息..."
+  rows={5}
+/>
+```
 
 ---
 
@@ -299,156 +461,15 @@ import { Label, Input } from './components/react-components';
 
 ---
 
-### Input - 輸入框組件
-
-```tsx
-import { Input, Label } from './components/react-components';
-import { useState } from 'react';
-
-const [value, setValue] = useState('');
-
-// 基本用法
-<Input 
-  value={value}
-  onChange={(e) => setValue(e.target.value)}
-  placeholder="請輸入"
-/>
-
-// 配合 Label 使用
-<div>
-  <Label htmlFor="name" required>姓名</Label>
-  <Input id="name" placeholder="請輸入姓名" />
-</div>
-
-// 密碼輸入（帶顯示/隱藏按鈕）
-<Input type="password" label="密碼" />
-
-// 搜尋輸入（帶搜尋圖示）
-<Input type="search" placeholder="搜尋..." />
-
-// 填充樣式（用於白色背景上）
-<div className="bg-card p-8">
-  <Input fill placeholder="填充樣式" />
-</div>
-```
-
-**Props:**
-- `label?: string` - 標籤文字（會自動產生 Label 組件）
-- `type?: string` - 輸入類型
-- `size?: 'sm' | 'md'` - 尺寸
-- `error?: boolean` - 錯誤狀態
-- `fill?: boolean` - 填充樣式（用於白色背景上）
-- `required?: boolean` - 必填標記
-
----
-
-### Select - 下拉選單組件
-
-```tsx
-import { Select } from './components/react-components';
-import { useState } from 'react';
-
-const [selected, setSelected] = useState('');
-
-const options = [
-  { value: 'apple', label: '蘋果' },
-  { value: 'banana', label: '香蕉' },
-  { value: 'orange', label: '橙子', disabled: true },
-];
-
-// 基本用法
-<Select 
-  options={options}
-  value={selected}
-  onChange={setSelected}
-  placeholder="請選擇水果"
-/>
-
-// 白色主題（用於淺灰背景上）
-<div className="bg-card p-8">
-  <Select 
-    theme="white"
-    options={options}
-    value={selected}
-    onChange={setSelected}
-  />
-</div>
-```
-
-**Props:**
-- `value?: string` - 當前選中的值
-- `onChange?: (value: string) => void` - 變更回調
-- `options: SelectOption[]` - 選項列表
-- `theme?: 'white' | 'grey'` - 主題
-- `size?: 'sm' | 'md'` - 尺寸
-
----
-
-### Checkbox - 核取方塊組件
-
-```tsx
-import { Checkbox } from './components/react-components';
-import { useState } from 'react';
-
-const [checked, setChecked] = useState(false);
-
-<Checkbox 
-  label="我同意條款"
-  checked={checked}
-  onChange={(e) => setChecked(e.target.checked)}
-/>
-```
-
----
-
-### Radio / RadioGroup - 單選按鈕組件
-
-```tsx
-import { Radio, RadioGroup } from './components/react-components';
-import { useState } from 'react';
-
-const [selected, setSelected] = useState('option1');
-
-<RadioGroup 
-  name="choice"
-  value={selected}
-  onChange={setSelected}
->
-  <Radio value="option1" label="選項 1" />
-  <Radio value="option2" label="選項 2" />
-  <Radio value="option3" label="選項 3" disabled />
-</RadioGroup>
-```
-
----
-
-### TextArea - 多行文字輸入組件
-
-```tsx
-import { TextArea } from './components/react-components';
-import { useState } from 'react';
-
-const [message, setMessage] = useState('');
-
-<TextArea 
-  value={message}
-  onChange={(e) => setMessage(e.target.value)}
-  placeholder="請輸入訊息..."
-  rows={5}
-/>
-```
-
----
-
 ## 🎨 實戰範例
 
-### 範例 1：登入表單（使用 Modal + Card）
+### 範例 1：登入表單（使用 Modal）
 
 ```tsx
 import { useState } from 'react';
 import { 
   Modal, ModalHeader, ModalBody, ModalFooter,
-  Input, Button, Label, Divider 
+  Input, Button, Label 
 } from './components/react-components';
 
 function LoginModal() {
@@ -509,58 +530,7 @@ function LoginModal() {
 }
 ```
 
-### 範例 2：資料卡片（使用 Card）
-
-```tsx
-import { 
-  Card, CardHeader, CardBody, CardFooter, CardIcon,
-  Button, Divider 
-} from './components/react-components';
-
-function PatientCard() {
-  return (
-    <Card>
-      <CardIcon>
-        <svg width="48" height="48" viewBox="0 0 24 24">
-          {/* 圖示 SVG */}
-        </svg>
-      </CardIcon>
-      
-      <CardHeader>患者資訊</CardHeader>
-      
-      <CardBody>
-        <div className="space-y-2">
-          <div className="flex justify-between">
-            <span className="text-muted-foreground">姓名</span>
-            <span>王小明</span>
-          </div>
-          
-          <Divider size="sm" />
-          
-          <div className="flex justify-between">
-            <span className="text-muted-foreground">病歷號</span>
-            <span>A123456789</span>
-          </div>
-          
-          <Divider size="sm" />
-          
-          <div className="flex justify-between">
-            <span className="text-muted-foreground">就診日期</span>
-            <span>2026-01-12</span>
-          </div>
-        </div>
-      </CardBody>
-      
-      <CardFooter>
-        <Button theme="primary">檢視詳情</Button>
-        <Button theme="tertiary">編輯</Button>
-      </CardFooter>
-    </Card>
-  );
-}
-```
-
-### 範例 3：表單區塊（使用 Card + Label）
+### 範例 2：表單區塊（使用 Card + Select fill）
 
 ```tsx
 import { 
@@ -576,7 +546,7 @@ function ProfileForm() {
         
         <CardBody>
           <div className="space-y-4">
-            {/* 在白色卡片上使用 fill Input */}
+            {/* 在白色卡片上使用 fill 樣式 */}
             <div>
               <Label htmlFor="name" required>姓名</Label>
               <Input id="name" fill placeholder="請輸入姓名" />
@@ -591,7 +561,7 @@ function ProfileForm() {
               <Label htmlFor="city">城市</Label>
               <Select
                 id="city"
-                theme="white"
+                fill
                 options={[
                   { value: 'taipei', label: '台北市' },
                   { value: 'taichung', label: '台中市' },
@@ -649,13 +619,23 @@ function ProfileForm() {
 
 ### 使用指南（參考 STYLING_GUIDELINES.md）
 
-**Input 樣式選擇：**
-- 在深灰背景（`bg-background`）上：使用 `<Input />` (預設，白底有邊框)
-- 在淺灰背景（`bg-card`）上：使用 `<Input fill />` (深灰底無邊框)
+**Input/Select 樣式選擇：**
+- 在深灰背景（`bg-background`）上：使用預設樣式（白底有邊框）
+- 在淺灰/白色背景（`bg-card`）上：使用 `fill` prop（深灰底無邊框）
 
-**Select 主題選擇：**
-- 在深灰背景上：使用 `theme="grey"` (預設)
-- 在淺灰背景上：使用 `theme="white"`
+```tsx
+// 深灰背景上
+<div className="bg-background">
+  <Input placeholder="白底有邊框" />
+  <Select options={options} />
+</div>
+
+// 白色卡片上
+<div className="bg-card">
+  <Input fill placeholder="深灰底無邊框" />
+  <Select fill options={options} />
+</div>
+```
 
 ---
 
@@ -670,7 +650,7 @@ function ProfileForm() {
 2. 確認 `@import './theme.css';` 已被註解
 3. 重新啟動開發伺服器
 
-📖 **詳細說明：** [THEME_CONFLICT_FIX.md](./THEME_CONFLICT_FIX.md)
+📖 **詳細說明：** [TROUBLESHOOTING.md](./TROUBLESHOOTING.md)
 
 ### 問題：組件沒有樣式
 
@@ -682,8 +662,8 @@ function ProfileForm() {
 ### 問題：Input/Select 顏色不對
 
 **檢查：**
-- 在 `bg-card` 上使用 `<Input fill />` 和 `<Select theme="white" />`
-- 在 `bg-background` 上使用 `<Input />` 和 `<Select />` (或 `theme="grey"`)
+- 在 `bg-card` 上使用 `fill` prop
+- 在 `bg-background` 上使用預設樣式
 
 📖 **詳細說明：** [STYLING_GUIDELINES.md](./STYLING_GUIDELINES.md)
 
@@ -730,19 +710,20 @@ react-components/
 ├── all.css                      ← 所有樣式集合
 ├── theme.css                    ← 設計系統變數
 ├── STYLING_GUIDELINES.md        ← 樣式使用指南
-├── THEME_CONFLICT_FIX.md        ← 衝突解決指南 🆕
+├── TROUBLESHOOTING.md           ← 疑難排解指南 🆕
+├── CHANGELOG.md                 ← 更新日誌
 ├── README.md                    ← 本文件
 │
 ├── Button.tsx / .css
 ├── Input.tsx / .css
-├── Select.tsx / .css
-├── Checkbox.tsx / .css
+├── Select.tsx / .css            🔄 新增 fill prop
+├── Checkbox.tsx / .css          🔄 改善 icon
 ├── Radio.tsx / .css
 ├── TextArea.tsx / .css
-├── Card.tsx / .css              🆕
-├── Modal.tsx / .css             🆕
-├── Divider.tsx / .css           🆕
-└── Label.tsx / .css             🆕
+├── Card.tsx / .css
+├── Modal.tsx / .css
+├── Divider.tsx / .css
+└── Label.tsx / .css
 ```
 
 ---
@@ -761,5 +742,5 @@ react-components/
 ---
 
 **Repository:** https://github.com/shihmin-chen/test  
-**版本:** 1.3.0  
+**版本:** 1.4.1  
 **最後更新:** 2026-01-12
